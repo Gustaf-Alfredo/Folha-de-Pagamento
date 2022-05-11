@@ -1,0 +1,9 @@
+
+section .container .botoes {
+    margin-top: 40px;  
+    /* justify-content: center; */
+}
+
+section .container .title.is-4 {
+    font-size: 1.4rem;
+}
