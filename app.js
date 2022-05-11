@@ -64,38 +64,92 @@ function CalcIncome() {
     let outDescIRPF = document.getElementById('outDescIRPF');
     let outDescTotal = document.getElementById('outDescTotal');
     let outSalLiq = document.getElementById('outSalLiq');
+    let outPerson = document.getElementById('outPerson')
 
     //captando dados 
     let Name = inName.value;
+    let Person = Name.value;
     let SalBruto = Number(inValue.value);
     
 
 
     //condição
-    if (SalBruto <= teto1INSS) {
-        descontoFixo = descontoFixo1;
-        taxaINSS = taxa1INSS;
-        dentroFaixaSalario = SalBruto;
-    } else if (SalBruto > teto1INSS && SalBruto <= teto2INSS) {
-        descontoFixo = descontoFixo1;
-        dentroFaixaSalario = SalBruto - teto1INSS;
-        taxaINSS = taxa2INSS;
-    } else if (SalBruto > teto2INSS && SalBruto <= teto3INSS) {
-        descontoFixo = descontoFixo2;
-        dentroFaixaSalario = SalBruto - teto2INSS;
-        taxaINSS = taxa3INSS;
-    } else if (SalBruto > teto3INSS && SalBruto <= teto4INSS) {
-        descontoFixo = descontoFixo3;
-        dentroFaixaSalario = SalBruto - teto3INSS;
-        taxaINSS = taxa4INSS;
-    } else {
-        descontoFixo = descontoFixo4;
-        dentroFaixaSalario = salarioBruto - teto4INSS;
-        taxaINSS = taxa4INSS;
-    }
+    
+  if (SalBruto <= teto1INSS) {
+    descontoFixo = 0;
+    dentroFaixaSalario = salarioBruto;
+    taxaINSS = taxa1INSS;
+  } else if (SalBruto > teto1INSS && SalBruto <= teto2INSS) {
+    descontoFixo = descontoFixo1;
+    dentroFaixaSalario = salarioBruto - teto1INSS;
+    taxaINSS = taxa2INSS;
+  } else if (SalBruto > teto2INSS && SalBruto <= teto3INSS) {
+    descontoFixo = descontoFixo2;
+    dentroFaixaSalario = SalBruto - teto2INSS;
+    taxaINSS = taxa3INSS;
+  } else if (SalBruto > teto3INSS && SalBruto <= teto4INSS) {
+    descontoFixo = descontoFixo3;
+    dentroFaixaSalario = SalBruto - teto3INSS;
+    taxaINSS = taxa4INSS;
+  } else {
+    descontoFixo = descontoFixo4;
+    dentroFaixaSalario = SalBruto - teto4INSS;
+    taxaINSS = 0;
+  }
+
+    var  descontoFaixa = dentroFaixaSalario * taxaINSS;
+    var descontoTotalINSS = descontoFixo + descontoFaixa;
+    var salarioDescINSS = salarioBruto-descontoTotalINSS;
+
+    if (salarioDescINSS <= teto1IRPF) {
+        taxaIRPF = 0;
+        parcelaDedutiva = 0;
+      } else if (salarioDescINSS > teto1IRPF && salarioDescINSS <= teto2IRPF) {
+        taxaIRPF = taxa1IRPF;
+        parcelaDedutiva = parcelaDedutiva1;
+      } else if (salarioDescINSS > teto2IRPF && salarioDescINSS <= teto3IRPF) {
+        taxaIRPF = taxa2IRPF;
+        parcelaDedutiva = parcelaDedutiva2;
+      } else if (salarioDescINSS > teto3IRPF && salarioDescINSS <= teto4IRPF) {
+        taxaIRPF = taxa3IRPF;
+        parcelaDedutiva = parcelaDedutiva3;
+      } else{
+        taxaIRPF = taxa4IRPF;
+        parcelaDedutiva = parcelaDedutiva4;
+      }
+      
+        var descontoIRPF = salarioDescINSS * taxaIRPF - parcelaDedutiva;
+
+        var descontoINSS=descontoTotalINSS;
+
+        var descontoTotal=descontoINSS+descontoIRPF;
+        salarioLiquido = salarioBruto-descontoTotal;
+
+
+        outPerson.textContent = `${Person}`
+        outDescINSS.textContent = `Desconoto INSS: $` + descontoINSS.toFixed(2);
+
+        outDescIRPF.textContent = `Desconto IRPF: R$` + descontoIRPF.toFixed(2);
+
+        outDescTotal.textContent = `Desconto Total: R$` + descontoTotal.toFixed(2);
+
+        outSalLiq.textContent = `Salário Líquido: R$` + salarioLiquido.toFixed(2);
 }
-
-
 
 var btCalcIncome = document.getElementById('btCalcIncome')
 btCalcIncome.addEventListener("click", CalcIncome)
+
+
+
+function Limpar() {
+    document.getElementById('outPerson').innerHTML = ""
+    document.getElementById("inValue").value = 0;
+     document.getElementById("outDescINSS").innerHTML = "";
+    document.getElementById("outDescIRPF").innerHTML = "";
+    document.getElementById("outDescTotal").innerHTML = "";
+    document.getElementById("outSalLiq").innerHTML = "";
+  }
+
+var btClear = document.getElementById('btClear'); 
+    btClear.addEventListener("click", Limpar);
+
