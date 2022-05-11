@@ -1,139 +1,82 @@
-var salarioBruto = null;
-var descontoFixo = null;
-var dentroFaixaSalario = null;
-//var descontoIRPF = null;
-//var descontoTotalINSS = null;
-//var salarioDescINSS = null;
-var parcelaDedutiva = 0;
-//var descontoFaixa=null;
-var taxaINSS=null;
-var taxaIRPF=null;
-var salarioLiquido=null;
-
-
-//constantes - INSS
-
-var teto1INSS = Number(1212);
-var teto2INSS = Number(2427.35);
-var teto3INSS = Number(3641.03);
-var teto4INSS = Number(7087.22);
-
-var taxa1INSS = Number(0.075);  //7,5%
-var taxa2INSS = Number(0.09);   //9%
-var taxa3INSS = Number(0.12);   //12%
-var taxa4INSS = Number(0.14);   //14%
-
-var descontoFixo1 = teto1INSS * taxa1INSS;
-var descontoFixo2 = (teto2INSS - teto1INSS) * taxa2INSS;
-var descontoFixo3 = (teto3INSS - teto2INSS) * taxa3INSS;
-var descontoFixo4 = (teto4INSS - teto3INSS) * taxa4INSS;
-
-
-
-//constantes - IRPF
-
-var teto1IRPF = Number(1903.98);
-var teto2IRPF = Number(2826.65);
-var teto3IRPF = Number(3751.05);
-var teto4IRPF = Number(4664.08);
-
-var taxa1IRPF = Number(0.075); //7,5%
-var taxa2IRPF = Number(0.15);  //9%
-var taxa3IRPF = Number(0.225); //12%
-var taxa4IRPF = Number(0.275); //14%
-
-console.log(parcelaDedutiva1)
-
-var parcelaDedutiva1 = teto1IRPF * taxa1IRPF;
-var parcelaDedutiva2 = (teto2IRPF - teto1IRPF) * taxa2IRPF;
-var parcelaDedutiva3 = (teto3IRPF - teto2IRPF) * taxa3IRPF;
-var parcelaDedutiva4 = (teto4IRPF - teto3IRPF) * taxa4IRPF;
-
 
 const SalMin = Number(1193.37)
 
 function CalcIncome() {
+
+
+      //constantes - INSS
+
+    const teto1INSS = Number(1212);
+    const teto2INSS = Number(2427.35);
+    const teto3INSS = Number(3641.03);
+    const teto4INSS = Number(7087.22);
+
+    const taxa1INSS = Number(0.075);  //7,5%
+    const taxa2INSS = Number(0.09);   //9%
+    const taxa3INSS = Number(0.12);   //12%
+    const taxa4INSS = Number(0.14);   //14%
+
+    var DescFixo1INSS = teto1INSS * taxa1INSS;
+    var DescFixo2INSS = (teto2INSS - teto1INSS) * taxa2INSS;
+    var DescFixo3INSS = (teto3INSS - teto2INSS) * taxa3INSS;
+    var DescFixo4INSS = (teto4INSS - teto3INSS) * taxa4INSS;
+
+
+
+    //constantes - IRPF
+
+    const teto1IRPF = Number(1903.98);
+    const teto2IRPF = Number(2826.65);
+    const teto3IRPF = Number(3751.05);
+    const teto4IRPF = Number(4664.08);
+
+    const taxa1IRPF = Number(0.075); //7,5%
+    const taxa2IRPF = Number(0.15);  //15%
+    const taxa3IRPF = Number(0.225); //22,5%
+    const taxa4IRPF = Number(0.275); //27,5%
+
+    var DescFixo1IRPF = teto1IRPF * taxa1IRPF;
+    var DescFixo2IRPF = (teto2IRPF - teto1IRPF) * taxa2IRPF;
+    var DescFixo3IRPF = (teto3IRPF - teto2IRPF) * taxa3IRPF;
+    var DescFixo4IRPF = (teto4IRPF - teto3IRPF) * taxa4IRPF;
+
     //criando referências
-    let inName = document.getElementById('inName');
-    let inValue = document.getElementById('inValue');
+
+    let inNome = document.getElementById('inNome');
+    let inSalBruto = document.getElementById('inSalBruto');
     
     let btCalcIncome = document.getElementById('btCalcIncome');
     let btClear = document.getElementById('btClear');
 
-    let outDescINSS = document.getElementById('outDescINSS');
-    let outDescIRPF = document.getElementById('outDescIRPF');
+    let outNome = document.getElementById('outNome')
+    let outSalBruto = document.getElementById('outSalBruto')
+    let outDescFixoINSS = document.getElementById('outDescFixoINSS');
+    let outDescFixoIRPF = document.getElementById('outDescFixoIRPF');
     let outDescTotal = document.getElementById('outDescTotal');
     let outSalLiq = document.getElementById('outSalLiq');
-    let outPerson = document.getElementById('outPerson')
+    
 
     //captando dados 
-    let Name = inName.value;
-    let Person = Name.value;
-    let SalBruto = Number(inValue.value);
-    
-
-
+    let Nome = inNome.value;
+    let SalBruto = Number(inSalBruto.value);
     //condição
     
-  if (SalBruto <= teto1INSS) {
-    descontoFixo = 0;
-    dentroFaixaSalario = salarioBruto;
-    taxaINSS = taxa1INSS;
-  } else if (SalBruto > teto1INSS && SalBruto <= teto2INSS) {
-    descontoFixo = descontoFixo1;
-    dentroFaixaSalario = salarioBruto - teto1INSS;
-    taxaINSS = taxa2INSS;
-  } else if (SalBruto > teto2INSS && SalBruto <= teto3INSS) {
-    descontoFixo = descontoFixo2;
-    dentroFaixaSalario = SalBruto - teto2INSS;
-    taxaINSS = taxa3INSS;
-  } else if (SalBruto > teto3INSS && SalBruto <= teto4INSS) {
-    descontoFixo = descontoFixo3;
-    dentroFaixaSalario = SalBruto - teto3INSS;
-    taxaINSS = taxa4INSS;
-  } else {
-    descontoFixo = descontoFixo4;
-    dentroFaixaSalario = SalBruto - teto4INSS;
-    taxaINSS = 0;
-  }
+    if (SalBruto <= 0 || SalBruto == NaN || SalBruto == null) {
+      window.alert('Valor inválido')
+    } else if (SalBruto > 0 && SalBruto <= teto1INSS) {
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo1INSS.toFixed(2)}`
+    } else if (SalBruto > teto1INSS && SalBruto <= teto2INSS) {
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo2INSS.toFixed(2)}`
+    } else if (SalBruto > teto2INSS && SalBruto <= teto3INSS) {
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo3INSS.toFixed(2)}`
+    } else if (SalBruto > teto3INSS && SalBruto <= teto4INSS) {
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo4INSS.toFixed(2)}`
+    } else { // !!
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo4INSS.toFixed(2)}`
+    }
 
-    var  descontoFaixa = dentroFaixaSalario * taxaINSS;
-    var descontoTotalINSS = descontoFixo + descontoFaixa;
-    var salarioDescINSS = salarioBruto-descontoTotalINSS;
-
-    if (salarioDescINSS <= teto1IRPF) {
-        taxaIRPF = 0;
-        parcelaDedutiva = 0;
-      } else if (salarioDescINSS > teto1IRPF && salarioDescINSS <= teto2IRPF) {
-        taxaIRPF = taxa1IRPF;
-        parcelaDedutiva = parcelaDedutiva1;
-      } else if (salarioDescINSS > teto2IRPF && salarioDescINSS <= teto3IRPF) {
-        taxaIRPF = taxa2IRPF;
-        parcelaDedutiva = parcelaDedutiva2;
-      } else if (salarioDescINSS > teto3IRPF && salarioDescINSS <= teto4IRPF) {
-        taxaIRPF = taxa3IRPF;
-        parcelaDedutiva = parcelaDedutiva3;
-      } else{
-        taxaIRPF = taxa4IRPF;
-        parcelaDedutiva = parcelaDedutiva4;
-      }
-      
-        var descontoIRPF = salarioDescINSS * taxaIRPF - parcelaDedutiva;
-
-        var descontoINSS=descontoTotalINSS;
-
-        var descontoTotal=descontoINSS+descontoIRPF;
-        salarioLiquido = salarioBruto-descontoTotal;
-
-
-        outPerson.textContent = `${Person}`
-        outDescINSS.textContent = `Desconoto INSS: $` + descontoINSS.toFixed(2);
-
-        outDescIRPF.textContent = `Desconto IRPF: R$` + descontoIRPF.toFixed(2);
-
-        outDescTotal.textContent = `Desconto Total: R$` + descontoTotal.toFixed(2);
-
-        outSalLiq.textContent = `Salário Líquido: R$` + salarioLiquido.toFixed(2);
+    console.log(teto3INSS)
+  
 }
 
 var btCalcIncome = document.getElementById('btCalcIncome')
