@@ -1,9 +1,27 @@
 
-const SalMin = Number(1193.37)
-
 function CalcIncome() {
+    
+    //criando referências
+
+    let inNome = document.getElementById('inNome');
+    let inSalBruto = document.getElementById('inSalBruto');
+    
+    let btCalcIncome = document.getElementById('btCalcIncome');
+    let btClear = document.getElementById('btClear');
+
+    let outNome = document.getElementById('outNome')
+    let outSalBruto = document.getElementById('outSalBruto')
+    let outDescFixoINSS = document.getElementById('outDescFixoINSS');
+    let outDescFixoIRPF = document.getElementById('outDescFixoIRPF');
+    let outDescTotal = document.getElementById('outDescTotal');
+    let outSalLiq = document.getElementById('outSalLiq');
+    
 
 
+  //captando dados 
+    let Nome = inNome.value;
+    let SalBruto = Number(inSalBruto.value);
+    
       //constantes - INSS
 
     const teto1INSS = Number(1212);
@@ -16,12 +34,10 @@ function CalcIncome() {
     const taxa3INSS = Number(0.12);   //12%
     const taxa4INSS = Number(0.14);   //14%
 
-    var DescFixo1INSS = teto1INSS * taxa1INSS;
-    var DescFixo2INSS = (teto2INSS - teto1INSS) * taxa2INSS;
-    var DescFixo3INSS = (teto3INSS - teto2INSS) * taxa3INSS;
-    var DescFixo4INSS = (teto4INSS - teto3INSS) * taxa4INSS;
-
-
+    var DescFixo1INSS = (teto1INSS*taxa1INSS);
+    var DescFixo2INSS = (teto2INSS-teto1INSS)*taxa2INSS;
+    var DescFixo3INSS = (teto3INSS-teto2INSS)*taxa3INSS;
+    var DescFixo4INSS = (teto4INSS-teto3INSS)*taxa4INSS;
 
     //constantes - IRPF
 
@@ -40,43 +56,59 @@ function CalcIncome() {
     var DescFixo3IRPF = (teto3IRPF - teto2IRPF) * taxa3IRPF;
     var DescFixo4IRPF = (teto4IRPF - teto3IRPF) * taxa4IRPF;
 
-    //criando referências
+    //respota do programa
+    outNome.textContent = `Nome: ${Nome}`
 
-    let inNome = document.getElementById('inNome');
-    let inSalBruto = document.getElementById('inSalBruto');
-    
-    let btCalcIncome = document.getElementById('btCalcIncome');
-    let btClear = document.getElementById('btClear');
-
-    let outNome = document.getElementById('outNome')
-    let outSalBruto = document.getElementById('outSalBruto')
-    let outDescFixoINSS = document.getElementById('outDescFixoINSS');
-    let outDescFixoIRPF = document.getElementById('outDescFixoIRPF');
-    let outDescTotal = document.getElementById('outDescTotal');
-    let outSalLiq = document.getElementById('outSalLiq');
-    
-
-    //captando dados 
-    let Nome = inNome.value;
-    let SalBruto = Number(inSalBruto.value);
-    //condição
+    //condição - INSS
     
     if (SalBruto <= 0 || SalBruto == NaN || SalBruto == null) {
       window.alert('Valor inválido')
-    } else if (SalBruto > 0 && SalBruto <= teto1INSS) {
-      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo1INSS.toFixed(2)}`
-    } else if (SalBruto > teto1INSS && SalBruto <= teto2INSS) {
-      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo2INSS.toFixed(2)}`
-    } else if (SalBruto > teto2INSS && SalBruto <= teto3INSS) {
-      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo3INSS.toFixed(2)}`
-    } else if (SalBruto > teto3INSS && SalBruto <= teto4INSS) {
-      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo4INSS.toFixed(2)}`
-    } else { // !!
-      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo4INSS.toFixed(2)}`
+    } 
+    
+      else if (SalBruto > 0 && SalBruto <= teto1INSS) {
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo1INSS.toFixed(2)}`;
+    } 
+
+        else if (SalBruto > teto1INSS && SalBruto <= teto2INSS) {
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo2INSS.toFixed(2)}`;
+    } 
+    
+        else if (SalBruto > teto2INSS && SalBruto <= teto3INSS) {
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo3INSS.toFixed(2)}`;
+    }   
+        else if (SalBruto > teto3INSS && SalBruto <= teto4INSS) {
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo4INSS.toFixed(2)}`;
+    } 
+    
+        else { // !!
+      outDescFixoINSS.textContent = `Desconto INSS: R$ ${DescFixo4INSS.toFixed(2)}`;
     }
 
-    console.log(teto3INSS)
+    //condição - IRPF
   
+    if (SalBruto > 0 && SalBruto <= teto1IRPF ) {
+      outDescFixoIRPF.textContent = `Desconto IRPF: R$ 0.00`;
+    } 
+    
+        else if (SalBruto > teto1IRPF && SalBruto <= teto2IRPF) {
+      outDescFixoIRPF.textContent = `Desconto IRPF: R$ ${DescFixo1IRPF.toFixed(2)}`;
+    } 
+    
+        else if (SalBruto > teto2IRPF && SalBruto <= teto3IRPF) {
+      outDescFixoIRPF.textContent = `Desconto IRPF: R$ ${DescFixo2IRPF.toFixed(2)}`;
+    } 
+    
+        else if (SalBruto > teto3IRPF && SalBruto <= teto4IRPF) {
+      outDescFixoIRPF.textContent = `Desconto IRPF: R$ ${DescFixo3IRPF.toFixed(2)}`;
+    } 
+    
+        else if (SalBruto > teto4IRPF) {
+      outDescFixoIRPF.textContent = `Desconto IRPF: R$ ${DescFixo4IRPF.toFixed(2)}`;
+    }
+
+    //condição - TOTAL
+
+    
 }
 
 var btCalcIncome = document.getElementById('btCalcIncome')
