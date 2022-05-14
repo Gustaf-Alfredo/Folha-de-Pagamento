@@ -92,14 +92,15 @@
                       </div>
                       
                       <div class="field">
-                        <label class="label"><s>Tipo de Contribuinte</s></label>
+                        <label class="label"><s>Em andamento</s></label>
                         <div class="control">
                           <div class="select">
-                            <select>
-                                <option>Ver opções</option>
-                                <option>Contribuinte individual  - 20%</option>
-                                <option>Contribuinte individual - 11%</option>
-                                <option>Facultativo de baixa renda - 5%</option>   
+                            <select id="inOpcao">
+                                <option   value="0">Ver opções</option>
+                                <option   value="1">-</option>  
+                                <option   value="2">-</option>
+                                <option   value="3">-</option>
+                                <option   value="4">-</option>  
                             </select>
                           </div>
                         </div>
@@ -116,9 +117,9 @@
 
                       
                       <div class="Respota-app">
-                         <p id="outNome"></p>
-                        <p id="outDescFixoINSS"></p>
-                        <p id="outDescFixoIRPF"></p>
+                        <p id="outNome"></p>
+                        <p id="outDescINSS"></p>
+                        <p id="outDescIRPF"></p>
                         <p id="outDescTotal"></p>
                         <p id="outSalLiq"></p>
                       </div>
