@@ -1,15 +1,15 @@
-
+    let inNome = document.getElementById('inNome');
+    let inSalBruto = document.getElementById('inSalBruto');
+    //let inOpcao = document.getElementById('inOpcao').value; //exceção 
+    let outNome = document.getElementById('outNome')
+    let outDescIRPF = document.getElementById('outDescIRPF')
+    let outDescINSS = document.getElementById('outDescINSS')
+    let outDescTotal = document.getElementById('outDescTotal')
+    let outSalLiq = document.getElementById('outSalLiq')
 
 function CalcDesconto () {
     //referências
-    let inNome = document.getElementById('inNome');
-    let inSalBruto = document.getElementById('inSalBruto');
-    let inOpcao = document.getElementById('inOpcao').value; //exceção
-    let outDescFixoINSS = document.getElementById('outDescFixoINSS')
-    let outNome = document.getElementById('outNome')
-    let outDescFixoIRPF = document.getElementById('outDescFixoIRPF')
-    let outDescTotal = document.getElementById('outDescTotal')
-    let outSalLiq = document.getElementById('outSalLiq')
+    
 
     //puxando valores
     let Nome = inNome.value;
@@ -20,9 +20,9 @@ function CalcDesconto () {
     let DescIRPF;
     let DescTotal;
     let SalLiq;
-    let SalMin = Number(1212);
+    let ResultadoDescINSS;
 
-    const teto1INSS = Number(1212);
+    const teto1INSS = Number(1212.01);
     const teto2INSS = Number(2427.35);
     const teto3INSS = Number(3641.03);
     const teto4INSS = Number(7087.22);
@@ -32,76 +32,136 @@ function CalcDesconto () {
     const taxa3INSS = Number(0.12);   //12%
     const taxa4INSS = Number(0.14);   //14%
 
+    const Deducao1IRPF = Number(142.80)
+    const Deducao2IRPF = Number(354.80)
+    const Deducao3IRPF = Number(636.13)
+    const Deducao4IRPF = Number(869.36)
 
-    const teto1IRPF = Number(1903.38);
-    const teto2IRPF = Number(2826.65);
-    const teto3IRPF = Number(3751.05);
-    const teto4IRPF = Number(4664.68);
+    //
+
+    if (SalBruto <= 0 || isNaN(SalBruto) || SalBruto == null) {
+        window.alert('[ERRO] Valor inválido');
+        return;
+    } 
     
-    const taxa1RPF = Number(142.80);
-    const taxa2RPF = Number(354.80);
-    const taxa3RPF = Number(636.13);
-    const taxa4RPF = Number(869.36);
+    if (SalBruto > 0 && SalBruto <= 1212.01) {
+        DescINSS = SalBruto * taxa1INSS;
+        outNome.textContent = `Nome: ${Nome}`
+        console.log(Nome)
+        outDescINSS.textContent = `Desconto do INSS(R$): ${DescINSS.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}.`
+        ResultadoDescINSS = SalBruto - DescINSS;
 
+        //console.log(DescINSS)
 
-    //lógica
+        window.alert('faixa 1')
 
-    switch (inOpcao) {
-        case '1':
-            DescINSS = (teto1INSS * taxa1INSS) + ((SalBruto - teto1INSS)*taxa2INSS);
-            outNome.textContent = `Nome: ${Nome}.`;
-            //console.log(Nome)
-            outDescFixoINSS.textContent = `Desconto do INSS(R$): ${DescINSS.toFixed(2)}`;
-        break;
-        case '2':
-            DescINSS = (teto1INSS * taxa1INSS) + ((teto2INSS-teto1INSS)*taxa2INSS) + ((SalBruto - teto2INSS)*taxa3INSS);
-            outNome.textContent = `Nome: ${Nome}.`;
-           // console.log(Nome)
-            outDescFixoINSS.textContent = `Desconto do INSS(R$): ${DescINSS.toFixed(2)}`;
-        break;
-        case '3':
-            DescINSS = (teto1INSS*taxa1INSS) + ((teto2INSS-teto1INSS)*taxa2INSS) + ((teto3INSS-teto2INSS)*taxa3INSS) + 
-            ((SalBruto - teto3INSS)*taxa4INSS);
-            outNome.textContent = `Nome: ${Nome}.`;
-           // console.log(Nome)
-            outDescFixoINSS.textContent = `Desconto do INSS(R$): ${DescINSS.toFixed(2)}`;
-        break;
-        case '4':
-            DescINSS = (teto1INSS*taxa1INSS) + ((teto2INSS-teto1INSS)*taxa2INSS) + ((teto3INSS-teto2INSS)*taxa3INSS) + 
-            ((teto4INSS-teto3INSS)* taxa4INSS ) + ((SalBruto - teto4INSS)*taxa4INSS);
-            outNome.textContent = `Nome: ${Nome}.`;
-            //console.log(Nome)
-            outDescFixoINSS.textContent = `Desconto do INSS(R$): ${DescINSS.toFixed(2)}`;
-        break;
-    }
-   
-        
-        /* DescINSS = (SalMin * Number(0.075)) + ((1500 - 1212)*0.09); */
-       
-    if (SalBruto > 0 && SalBruto <= teto1IRPF) {
-       outDescFixoIRPF.textContent = `Desconto do IRPF(R$): Isento`
-    }  else if (SalBruto > teto1IRPF && SalBruto <= teto2IRPF) {
-        DescIRPF = taxa1RPF;
-        outDescFixoIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toFixed(2)}`
-    }  else if (SalBruto > teto2IRPF && SalBruto <= teto3INSS) {
-        DescIRPF = taxa2RPF;
-        outDescFixoIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toFixed(2)}`
-    }  else if (SalBruto > teto3IRPF && SalBruto <= teto4IRPF) {
-        DescIRPF = taxa3RPF;
-        outDescFixoIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toFixed(2)}`
-    }  else if (SalBruto > teto4IRPF) {
-        DescIRPF = taxa4RPF;
-        outDescFixoIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toFixed(2)}`
+        if (ResultadoDescINSS > 0  && ResultadoDescINSS <= 1903.98) {
+            outDescIRPF.textContent = 'Desconto do IRPF(R$): 0,00 (Isento)'
+            outDescTotal.textContent = `Desconto Total(R$): ${DescINSS.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
+            //console.log(ResultadoDescINSS)
+        }
+        return
+    } 
+    
+    if (SalBruto > 1212.01 && SalBruto <= 2427.35) {
+        window.alert('faixa 2')
+        DescINSS = SalBruto * taxa2INSS;
+        outNome.textContent = `Nome: ${Nome}`
+        outDescINSS.textContent = `Desconto do INSS(R$): ${DescINSS.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}.`;
+        ResultadoDescINSS = SalBruto - DescINSS;
+        //console.log(ResultadoDescINSS)
+
+        if (ResultadoDescINSS > 0  && ResultadoDescINSS <= 1903.98) {
+            outDescIRPF.textContent = 'Desconto do IRPF(R$): 0,00 (Isento)';
+            outDescTotal.textContent = `Desconto Total(R$): ${DescINSS.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            //console.log(ResultadoDescINSS)
+        } else if (ResultadoDescINSS > 1903.98 && ResultadoDescINSS <= 2826.68) {
+            DescIRPF = ResultadoDescINSS * 0.075;
+            outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            outDescTotal.textContent = `Desconto Total(R$): ${DescINSS + DescIRPF}`;
+        }
+        return
     }
     
-    DescTotal = DescINSS + DescIRPF;
-    SalLiq =   SalBruto - DescTotal;
-    outDescTotal.textContent = `Desconto Total(R$): ${DescTotal.toFixed(2)}`;
-    console.log(DescTotal)
-    outSalLiq.textContent = `Salário Líquido(R$): ${SalLiq.toFixed(2)}`
+    if (SalBruto > 2427.35 && SalBruto <= 3641.03) {
+        window.alert('faixa 3')
+        DescINSS = SalBruto * taxa3INSS;
+        outNome.textContent = `Nome: ${Nome}`
+        outDescINSS.textContent = `Desconto do INSS(R$): ${DescINSS.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}.`
+        ResultadoDescINSS = SalBruto - DescINSS;
+
+
+        if (ResultadoDescINSS > 1903.98 && ResultadoDescINSS <= 2826.68) {
+            DescIRPF = (ResultadoDescINSS * 0.075) - Deducao1IRPF;
+            outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+        } else if (ResultadoDescINSS > 2826.68 && ResultadoDescINSS <= 3751.06) {
+            DescIRPF = (ResultadoDescINSS * 0.15) - Deducao2IRPF;
+            outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF)}`;
+        }
+        return
+    }
     
+    if (SalBruto > 3641.03 && SalBruto <= 7087.22) {
+        window.alert('faixa 4')
+        DescINSS = SalBruto * taxa4INSS;
+        outNome.textContent = `Nome: ${Nome}`
+        outDescINSS.textContent = `Desconto do INSS(R$): ${DescINSS.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}.`;
+        ResultadoDescINSS = SalBruto - DescINSS;
+
+        if (ResultadoDescINSS > 2826.68 && ResultadoDescINSS <= 3751.06) {
+            DescIRPF = (ResultadoDescINSS * 0.15) - Deducao2IRPF;
+            outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF)}`;
+        } else if (ResultadoDescINSS > 3751.06 && ResultadoDescINSS <= 4664.68) {
+            DescIRPF = (ResultadoDescINSS * 0.225) - Deducao3IRPF;
+            outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+        } else if (ResultadoDescINSS > 4664.68) {
+            DescIRPF = (ResultadoDescINSS * 0.275) - Deducao4IRPF;
+            outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+        }
+
+        return
+    }
+    
+    if (SalBruto > 7087.22)   {
+        window.alert('faixa 4.2')
+        DescINSS = teto4INSS * taxa4INSS;
+        outNome.textContent = `Nome: ${Nome}`
+        outDescINSS.textContent = `Desconto do INSS(R$): ${DescINSS.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}.`
+        ResultadoDescINSS = SalBruto - DescINSS;
+
+        if (ResultadoDescINSS > 4664.68) {
+            DescIRPF = (ResultadoDescINSS * 0.275) - Deducao4IRPF;
+            outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+        }
+        return
+    }
+
+    let BaseIRPF = ResultadoDescINSS.value;
+    console.log(ResultadoDescINSS)
+
+    
+
+    //console.log(ResultadoDescINSS)
 }
 
 var btCalcIncome = document.getElementById('btCalcIncome');
 btCalcIncome.addEventListener("click", CalcDesconto)
 
+function clear () {
+        inNome.value = "";
+        inSalBruto.value = "";
+        outDescIRPF.textContent = "";
+        outDescINSS.textContent = "";
+        outDescTotal.textContent = "";
+        outNome.textContent = "";
+        outSalLiq.textContent = "";
+}
+
+var btClear = document.getElementById('btClear');
+btClear.addEventListener("click", clear)
