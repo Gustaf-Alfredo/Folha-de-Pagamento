@@ -11,3 +11,7 @@ section .container .title.is-4 {
 section .container .column.is-9 abbr {
     text-decoration: none;
 }
+
+/* section .container .column.is-9 .Dependent {
+    display: none;
+} */
