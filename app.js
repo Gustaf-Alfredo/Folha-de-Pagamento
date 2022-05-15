@@ -55,11 +55,14 @@ function CalcDesconto () {
 
         window.alert('faixa 1')
 
-        if (ResultadoDescINSS > 0  && ResultadoDescINSS <= 1903.98) {
-            outDescIRPF.textContent = 'Desconto do IRPF(R$): 0,00 (Isento)'
-            outDescTotal.textContent = `Desconto Total(R$): ${DescINSS.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
-            //console.log(ResultadoDescINSS)
-        }
+            if (ResultadoDescINSS > 0  && ResultadoDescINSS <= 1903.98) {
+                outDescIRPF.textContent = 'Desconto do IRPF(R$): 0,00 (Isento)'
+                outDescTotal.textContent = `Desconto Total(R$): ${DescINSS.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`
+                DescTotal = DescINSS;
+                //console.log(DescTotal)
+                outSalLiq.textContent = `Salário Líquido(R$): ${(SalBruto - DescTotal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`;
+                //console.log(ResultadoDescINSS)
+            }
         return
     } 
     
@@ -74,11 +77,15 @@ function CalcDesconto () {
         if (ResultadoDescINSS > 0  && ResultadoDescINSS <= 1903.98) {
             outDescIRPF.textContent = 'Desconto do IRPF(R$): 0,00 (Isento)';
             outDescTotal.textContent = `Desconto Total(R$): ${DescINSS.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            DescTotal = DescINSS;
+            outSalLiq.textContent = `Salário Líquido(R$): ${(SalBruto - DescTotal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`;
             //console.log(ResultadoDescINSS)
         } else if (ResultadoDescINSS > 1903.98 && ResultadoDescINSS <= 2826.68) {
             DescIRPF = ResultadoDescINSS * 0.075;
             outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
-            outDescTotal.textContent = `Desconto Total(R$): ${DescINSS + DescIRPF}`;
+            outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`;
+            DescTotal = DescINSS + DescIRPF;
+            outSalLiq.textContent = `Salário Líquido(R$): ${(SalBruto - DescTotal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`
         }
         return
     }
@@ -95,10 +102,14 @@ function CalcDesconto () {
             DescIRPF = (ResultadoDescINSS * 0.075) - Deducao1IRPF;
             outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
             outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            DescTotal = DescINSS + DescIRPF;
+            outSalLiq.textContent = `Salário Líquido(R$): ${(SalBruto - DescTotal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`
         } else if (ResultadoDescINSS > 2826.68 && ResultadoDescINSS <= 3751.06) {
             DescIRPF = (ResultadoDescINSS * 0.15) - Deducao2IRPF;
             outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
             outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF)}`;
+            DescTotal = DescINSS + DescIRPF;
+            outSalLiq.textContent = `Salário Líquido(R$): ${(SalBruto - DescTotal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`
         }
         return
     }
@@ -114,14 +125,20 @@ function CalcDesconto () {
             DescIRPF = (ResultadoDescINSS * 0.15) - Deducao2IRPF;
             outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
             outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF)}`;
+            DescTotal = DescINSS + DescIRPF;
+            outSalLiq.textContent = `Salário Líquido(R$): ${(SalBruto - DescTotal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`
         } else if (ResultadoDescINSS > 3751.06 && ResultadoDescINSS <= 4664.68) {
             DescIRPF = (ResultadoDescINSS * 0.225) - Deducao3IRPF;
             outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
             outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            DescTotal = DescINSS + DescIRPF;
+            outSalLiq.textContent = `Salário Líquido(R$): ${(SalBruto - DescTotal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`
         } else if (ResultadoDescINSS > 4664.68) {
             DescIRPF = (ResultadoDescINSS * 0.275) - Deducao4IRPF;
             outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
             outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            DescTotal = DescINSS + DescIRPF;
+            outSalLiq.textContent = `Salário Líquido(R$): ${(SalBruto - DescTotal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`
         }
 
         return
@@ -138,6 +155,8 @@ function CalcDesconto () {
             DescIRPF = (ResultadoDescINSS * 0.275) - Deducao4IRPF;
             outDescIRPF.textContent = `Desconto do IRPF(R$): ${DescIRPF.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
             outDescTotal.textContent = `Desconto Total(R$): ${(DescINSS + DescIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+            DescTotal = DescINSS + DescIRPF;
+            outSalLiq.textContent = `Salário Líquido(R$): ${(SalBruto - DescTotal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL'})}`
         }
         return
     }
