@@ -96,13 +96,22 @@
                             <s><abbr title="Em andamento">Possui dependentes?</abbr></s>
                           </label>
                           <label class="radio">
-                            <input type="radio" name="answer">
+                            <input type="radio" name="answer" id="inCheckSim">
                             Sim
                           </label>
                           <label class="radio">
-                            <input type="radio" name="answer">
+                            <input type="radio" name="answer" id="inCheckNao">
                             Não
                           </label>
+                      </div>
+
+                      <div class="field Dependent">
+                        <div class="control has-icons-left">
+                          <input class="input" type="number" placeholder="Dependent input" value="" id="inDependente">
+                          <span class="icon is-small is-left">
+                            <i class="fas fa-home"></i>
+                          </span>
+                        </div>
                       </div>
 
 
@@ -138,6 +147,7 @@
                         <p id="outDescIRPF"></p>
                         <p id="outDescTotal"></p>
                         <p id="outSalLiq"></p>
+                        <p id="outBaseIRPF"></p>
                       </div>
                       
                       
