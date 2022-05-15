@@ -7,3 +7,7 @@ section .container .botoes {
 section .container .title.is-4 {
     font-size: 1.4rem;
 }
+
+section .container .column.is-9 abbr {
+    text-decoration: none;
+}
