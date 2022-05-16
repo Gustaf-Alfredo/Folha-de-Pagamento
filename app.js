@@ -428,3 +428,18 @@ function clear () {
 
 var btClear = document.getElementById('btClear');
 btClear.addEventListener("click", clear)
+
+function DependenteS() {
+    let DependenteSim = document.getElementById('inCheckSim');
+    let DependenteDisplay = document.getElementById('DependenteDisplay');
+    window.alert('Possui dependentes');
+    DependenteDisplay.classList.remove("DependenteDisplay");
+}
+
+
+function DependenteN(){
+    let DependenteNao = document.getElementById('inCheckNao');
+    let DependenteDisplay = document.getElementById('DependenteDisplay');
+    window.alert('Não possui dependentes');
+    DependenteDisplay.classList.add("DependenteDisplay");
+}

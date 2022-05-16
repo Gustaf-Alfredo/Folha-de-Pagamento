@@ -12,6 +12,6 @@ section .container .column.is-9 abbr {
     text-decoration: none;
 }
 
-/* section .container .column.is-9 .Dependent {
+section .container .column.is-9 .DependenteDisplay {
     display: none;
-} */
+} 
