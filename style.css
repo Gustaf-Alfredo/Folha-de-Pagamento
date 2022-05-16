@@ -15,3 +15,31 @@ section .container .column.is-9 abbr {
 section .container .column.is-9 .DependenteDisplay {
     display: none;
 } 
+
+section .container .column.is-9 .Respota-app {
+    font-weight: 600;
+    background-color: rgba(120, 139, 139, 0.644);
+    margin: auto;
+    text-align: center;
+}
+
+section .container .column.is-9 .Respota-app :nth-child(1) {
+    background-color: rgb(68, 60, 60);
+    color: white;
+}
+
+section .container .column.is-9 .Respota-app :nth-child(2),
+section .container .column.is-9 .Respota-app :nth-child(4),
+section .container .column.is-9 .Respota-app :nth-child(3) {
+    color: rgb(235, 70, 70);
+}
+
+section .container .column.is-9 .Respota-app :nth-child(6) {
+    color: green;
+}
+
+section .container .column.is-9 .Respota-app :nth-child(5) {
+    color: blue;
+}
+
+
