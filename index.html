@@ -84,7 +84,9 @@
                       <div class="field">
                         <label class="label">Salário Bruto</label>
                         <div class="control has-icons-left">
-                          <input class="input" type="number" placeholder="Income input" value="" id="inSalBruto">
+                          <input class="input" type="number" placeholder="Income input" value="" id="inSalBruto"
+                          pattern="[0-9]+([,\.][0-9]+)?" name="my-num"
+                          title="A entrada numérica deve começar com um número e usar vírgula ou ponto como caractere decimal.">
                           <span class="icon is-small is-left">
                             <i class="fas fa-city"></i>
                           </span>
