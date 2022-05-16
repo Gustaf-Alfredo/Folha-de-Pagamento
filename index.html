@@ -96,16 +96,16 @@
                             <s><abbr title="Em andamento">Possui dependentes?</abbr></s>
                           </label>
                           <label class="radio">
-                            <input type="radio" name="answer" id="inCheckSim">
+                            <input type="radio" name="answer" id="inCheckSim" onclick="DependenteS()">
                             Sim
                           </label>
                           <label class="radio">
-                            <input type="radio" name="answer" id="inCheckNao">
+                            <input type="radio" name="answer" id="inCheckNao"  onclick="DependenteN()">
                             Não
                           </label>
                       </div>
 
-                      <div class="field Dependent">
+                      <div class="field DependenteDisplay" id="DependenteDisplay">
                         <div class="control has-icons-left">
                           <input class="input" type="number" placeholder="Dependent input" value="" id="inDependente">
                           <span class="icon is-small is-left">
@@ -141,13 +141,14 @@
                       </div>
 
                       
-                      <div class="Respota-app">
+                      <div class="Respota-app" id="Resposta-app">
                         <p id="outNome"></p>
-                        <p id="outDescINSS"></p>
+                        <p id="outDescINSS"></p>         
                         <p id="outDescIRPF"></p>
                         <p id="outDescTotal"></p>
-                        <p id="outSalLiq"></p>
                         <p id="outBaseIRPF"></p>
+                        <p id="outSalLiq"></p>
+                        
                       </div>
                       
                       

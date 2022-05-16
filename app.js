@@ -4,12 +4,14 @@
     let inCheckNao = document.getElementById('inCheckNao');
     let inDependente = document.getElementById('inDependente');
     //let inOpcao = document.getElementById('inOpcao').value; //exceção 
-    let outNome = document.getElementById('outNome')
-    let outDescIRPF = document.getElementById('outDescIRPF')
-    let outDescINSS = document.getElementById('outDescINSS')
-    let outDescTotal = document.getElementById('outDescTotal')
-    let outSalLiq = document.getElementById('outSalLiq')
-    let outBaseIRPF = document.getElementById('outBaseIRPF')
+    let outNome = document.getElementById('outNome');
+    let outDescIRPF = document.getElementById('outDescIRPF');
+    let outDescINSS = document.getElementById('outDescINSS');
+    let outDescTotal = document.getElementById('outDescTotal');
+    let outSalLiq = document.getElementById('outSalLiq');
+    let outBaseIRPF = document.getElementById('outBaseIRPF');
+
+    let RespotaApp = document.getElementById('Resposta-app');
     
 
 function CalcDesconto () {
@@ -428,3 +430,18 @@ function clear () {
 
 var btClear = document.getElementById('btClear');
 btClear.addEventListener("click", clear)
+
+function DependenteS() {
+    let DependenteSim = document.getElementById('inCheckSim');
+    let DependenteDisplay = document.getElementById('DependenteDisplay');
+    window.alert('Possui dependentes');
+    DependenteDisplay.classList.remove("DependenteDisplay");
+}
+
+
+function DependenteN(){
+    let DependenteNao = document.getElementById('inCheckNao');
+    let DependenteDisplay = document.getElementById('DependenteDisplay');
+    window.alert('Não possui dependentes');
+    DependenteDisplay.classList.add("DependenteDisplay");
+}
