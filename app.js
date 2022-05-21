@@ -59,7 +59,7 @@ function CalcDesconto () {
     
     if (SalBruto > 0 && SalBruto <= 1212.01) {
         DescINSS = SalBruto * taxa1INSS;       
-        console.log(Nome)
+        //console.log(Nome)
         ResultadoDescINSS = SalBruto - DescINSS;
 
         //console.log(DescINSS)
