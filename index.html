@@ -1,166 +1,224 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Folha da Pagamento</title>
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-</head>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+    />
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="index.html">
-                    <img src="https://bulma.io/images/bulma-logo.png"
-                        alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112"
-                        height="28">
-                </a>
-            </div>
-            <!-- <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a> -->
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="index.html">
+            <img
+              src="https://bulma.io/images/bulma-logo.png"
+              alt="Bulma: Free, open source, and modern CSS framework based on Flexbox"
+              width="112"
+              height="28"
+            />
+          </a>
+        </div>
 
-            <div id="navbarBasicExample" class="navbar-menu is-active">
-                <!-- desativar is-active -->
-                <div class="navbar-start">
-                    <a class="navbar-item" href="index.html">
-                        Início
-                    </a>
+        <div id="navbarBasicExample" class="navbar-menu is-active">
+          <!-- desativar is-active -->
+          <div class="navbar-start">
+            <a class="navbar-item" href="index.html"> Início </a>
 
-                    <a class="navbar-item" href="referencias.html">
-                        Referências
-                    </a>
-                </div>
-            </div>
-
-        </nav>
+            <a class="navbar-item" href="referencias.html"> Cálculos </a>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <section class="section">
-        <div class="container">
-            <div class="columns">
-                <div class="column">
-                    <div class="card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-content">
-                                    <p class="title is-4">Folha de Pagamento</p>
-                                    <span class="tag is-dark is-medium">Nome da Empresa</span>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                <p>(00) 00000-0000</p>
-                                <p>teste.contato@email.com</p>
-                            </div>
-                        </div>
-                    </div>
+      <div class="container">
+        <div class="columns">
+          <div class="column">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img
+                    src="https://bulma.io/images/placeholders/1280x960.png"
+                    alt="Placeholder image"
+                  />
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4">Folha de Pagamento</p>
+                    <span class="tag is-dark is-medium">Nome da Empresa</span>
+                  </div>
                 </div>
 
-                <div class="column is-9">
-                    <div class="field">
-                        <label class="label">Nome</label>
-                        <div class="control has-icons-left">
-                          <input class="input" type="text" placeholder="Name input" id="inNome">
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-city"></i>
-                          </span>
-                        </div>
-                        
-                      </div>
-                      
-                      <div class="field">
-                        <label class="label">Salário Bruto</label>
-                        <div class="control has-icons-left">
-                          <input class="input" type="number" placeholder="Income input" value="" id="inSalBruto"
-                          pattern="[0-9]+([,\.][0-9]+)?" name="my-num"
-                          title="A entrada numérica deve começar com um número e usar vírgula ou ponto como caractere decimal.">
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-city"></i>
-                          </span>
-                        </div>
-                      </div>
+                <div class="content">
+                  <p>(00) 00000-0000</p>
+                  <p>teste.contato@email.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-                      <div class="field">
-                          <label class="label">
-                            <s><abbr title="Em andamento">Possui dependentes?</abbr></s>
-                          </label>
-                          <label class="radio">
-                            <input type="radio" name="answer" id="inCheckSim" onclick="DependenteS()">
-                            Sim
-                          </label>
-                          <label class="radio">
-                            <input type="radio" name="answer" id="inCheckNao"  onclick="DependenteN()">
-                            Não
-                          </label>
-                      </div>
+          <div class="column is-9">
+            
+            <div class="field" id="nome">
+              <label class="label">Nome</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input is-danger ValidacaoNome" type="text" placeholder="Text input" value="" id="inNome">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class="fas fa-exclamation-triangle ValidacaoIcon"></i>
+                </span>
+              </div>
+              <p class="help is-danger ValidacaoHelp">Por favor, preencha corretamente o formulário...</p>
+            </div>
 
-                      <div class="field DependenteDisplay" id="DependenteDisplay">
-                        <div class="control has-icons-left">
-                          <input class="input" type="number" placeholder="Dependent input" value="" id="inDependente">
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-home"></i>
-                          </span>
-                        </div>
-                      </div>
+            <div class="field">
+              <label class="label">Salário Bruto</label>
+              <div class="control has-icons-left">
+                <input
+                  class="input"
+                  type="number"
+                  placeholder="Income input"
+                  value=""
+                  id="inSalBruto"
+                  pattern="[0-9]+([,\.][0-9]+)?"
+                  name="my-num"
+                  title="A entrada numérica deve começar com um número e usar vírgula ou ponto como caractere decimal."
+                />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-city"></i>
+                </span>
+              </div>
+            </div>
 
+            <!-- Mesma div os dois checkbox -->
+            <div class="flexboxCheck">
+                <div class="checkbox1">
+                  <!-- DEPENDENTES -->
+                  <div class="field">
+                    <label class="label"> Possui dependentes? </label>
+                    <label class="radio check">
+                     <!--  SIM -->
+                      <input
+                        type="checkbox"
+                        id="checkDependentesSim"
+                        onclick=""/>
+                      <span class="checkmark"></span>
+                      Sim
+                    </label>
+                   <!--  NÃO -->
 
-                      <div class="field">
-                        <label class="label"><s>Em andamento</s></label>
-                        <div class="control">
-                          <div class="select">
-                            <select id="inOpcao">
-                                <option   value="0">Ver opções</option>
-                                <option   value="1">-</option>  
-                                <option   value="2">-</option>
-                                <option   value="3">-</option>
-                                <option   value="4">-</option>  
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      
-                      <div class="field is-grouped botoes">
-                        <div class="control">
-                          <button class="button is-primary" id="btCalcIncome">Calcular</button>
-                        </div>
-                        <div class="control">
-                          <button class="button is-danger is-light" id="btClear">Limpar</button>
-                        </div>
-                      </div>
+                   <!--OBS: colocando o checked="checked vai ficar marcado padrão"-->
+                    <label class="radio check">
+                      <input
+                        type="checkbox"
+                        checked="checked"
+                        id="checkDependentesNao"
+                        onclick=""
+                      />
+                      <span class="checkmark"></span>
+                      Não
+                    </label>
+                  </div>
+                  <!-- INPUT DE RESPOSTA -->
+                  <div class="field checkDisplay" id="Dependente">
+                    <div class="control has-icons-left">
+                      <input
+                        class="input"
+                        type="number"
+                        placeholder="Dependent input"
+                        value=""
+                        id="inDependente"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-home"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
 
-                      
-                      <div class="Respota-app" id="Resposta-app">
-                        <p id="outNome"></p>
-                        <p id="outDescINSS"></p>         
-                        <p id="outDescIRPF"></p>
-                        <p id="outDescTotal"></p>
-                        <p id="outBaseIRPF"></p>
-                        <p id="outSalLiq"></p>
-                        
-                      </div>
-                      
-                      
-                      
+                <div class="checkbox2">
+                  <!-- PENSÃO ALIMENTÍCIA -->
+                  <div class="field">
+                    <label class="label"> Paga pensão alimentícia? </label>
+                    <!-- SIM -->
+                    <label class="radio check">
+                      <input
+                        type="checkbox"
+                       
+                        id="checkPensaoSim"
+                        onclick=""
+                      />
+                      <span class="checkmark"></span>
+                      Sim
+                    </label>
+                    <!-- NÃO -->
+
+                     <!--OBS: colocando o checked="checked vai ficar marcado padrão"-->
+                    <label class="radio check">
+                      <input
+                        type="checkbox"
+                        checked="checked"
+                        id="checkPensaoNao"
+                        onclick=""
+                      />
+                      <span class="checkmark"></span>
+                      Não
+                    </label>
+                  </div>
+                   <!-- INPUT DE RESPOSTA -->
+                  <div class="field checkDisplay" id="Pensao">
+                    <div class="control has-icons-left">
+                      <input
+                        class="input"
+                        type="number"
+                        placeholder="Pension input"
+                        value=""
+                        id="inPensao"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-home"></i>
+                      </span>
+                    </div>
+                  </div>
                 </div>
             </div>
+
+            <div class="field is-grouped botoes">
+              <div class="control">
+                <button class="button is-primary" id="btCalcular">
+                  Calcular
+                </button>
+              </div>
+              <div class="control">
+                <button class="button is-danger is-light" id="btLimpar">
+                  Limpar
+                </button>
+              </div>
+            </div>
+
+            <div class="" id="">
+              <pre id="outResposta"></pre>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <script src="app.js"></script>
-</body>
-
+  </body>
 </html>
