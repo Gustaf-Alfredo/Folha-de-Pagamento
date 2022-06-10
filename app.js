@@ -95,9 +95,19 @@
         PensaoDisplay.classList.add('checkDisplayPensao');
         checkPensaoSim.checked = "";
     }
+
+
+
+
+
+    function Limpar() {
+        inNome.value = '';
+        inSalBruto.value = '';
+    }
     //acionamento de eventos
         //botões
             btCalcular.addEventListener("click", calcular);
+            btLimpar.addEventListener("click", Limpar);
         //input
             inNome.addEventListener("click", resetNome);
             inSalBruto.addEventListener("click", resetSalBruto);
