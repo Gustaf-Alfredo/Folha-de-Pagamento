@@ -7,8 +7,8 @@
     const inPensao = document.getElementById('inPensao');
     
     //checkmark - check
-    const checkDependeteSim = document.getElementById('checkDependeteSim');
-    const checkDependeteNao = document.getElementById('checkDependeteNao');
+    const checkDependenteSim = document.getElementById('checkDependenteSim');
+    const checkDependenteNao = document.getElementById('checkDependenteNao');
     const checkPensaoSim = document.getElementById('checkPensaoSim');
     const checkPensaoNao = document.getElementById('checkPensaoNao')
 
@@ -24,7 +24,10 @@
         //SalBruto
             const outValidacaoSalBrutoHelp = document.getElementById('outValidacaoSalBrutoHelp');
             const outValidacaoSalBrutoIcon = document.getElementById('outValidacaoSalBrutoIcon');
-            const outValidacaoBordaSalBruto = document.querySelector(".outValidacaoBordaSalBruto")
+            const outValidacaoBordaSalBruto = document.querySelector(".outValidacaoBordaSalBruto");
+        //display - Dependente 
+            const DependenteDisplay = document.getElementById('DependenteDisplay');
+            const PensaoDisplay = document.getElementById('PensaoDisplay');
 
     //resposta do programa - out
     const outResposta = document.getElementById('outResposta');
@@ -37,18 +40,24 @@
         let nome = inNome.value;
         let salBruto = Number(inSalBruto.value);
 
+        /* let DependenteSim = checkDependeteSim.checked;
+        let DependenteNao = checkDependeteNao.checked;
+        let PensaoSim = checkPensaoSim.checked;
+        let PensaoNao = checkPensaoNao.checked; */
+
     //validação para nome
         if(nome == "") {
             inNome.style.border = '2px solid #FF2B56';
             outValidacaoNomeHelp.textContent = 'Por favor, preencha corretamente o formulário...' ;           
             outValidacaoNomeIcon.classList.remove("ValidacaoNomeIcon");
-        } else
+        } 
     //validação para salário bruto
         if (salBruto <= 0  || salBruto == "" || isNaN(salBruto)) {
            inSalBruto.style.border = '2px solid #FF2B56';
            outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500,50';
            outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
         }
+
     }
 
 
@@ -67,13 +76,41 @@
         outValidacaoSalBrutoIcon.classList.add('ValidacaoSalBrutoIcon');
     }
 
+    function checkSimDependente() {
+        DependenteDisplay.classList.remove('checkDisplayDependente');
+        checkDependenteNao.checked = "";
+    } 
 
+    function checkNaoDependente() {
+        DependenteDisplay.classList.add('checkDisplayDependente');
+        checkDependenteSim.checked = "";
+    }
 
+    function checkSimPensao() {
+        PensaoDisplay.classList.remove('checkDisplayPensao');
+        checkPensaoNao.checked = "";
+    }
 
+    function checkNaoPensao() {
+        PensaoDisplay.classList.add('checkDisplayPensao');
+        checkPensaoSim.checked = "";
+    }
     //acionamento de eventos
-    btCalcular.addEventListener("click", calcular);
-    inNome.addEventListener("click", resetNome);
-    inSalBruto.addEventListener("click", resetSalBruto);
+        //botões
+            btCalcular.addEventListener("click", calcular);
+        //input
+            inNome.addEventListener("click", resetNome);
+            inSalBruto.addEventListener("click", resetSalBruto);
+        //check
+             checkDependenteSim.addEventListener("click", checkSimDependente)
+             checkDependenteNao.addEventListener("click", checkNaoDependente)
+             checkPensaoSim.addEventListener("click", checkSimPensao)
+             checkPensaoNao.addEventListener("click", checkNaoPensao)
+            /* 
+            obs:    checkDependenteSim - variável referenciada
+                    checkSimDependente - função 
+            */
+
 
 
 

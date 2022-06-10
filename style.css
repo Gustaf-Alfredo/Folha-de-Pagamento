@@ -14,7 +14,10 @@ section .container .title.is-4 {
 /* CHECKBOX -------------------------------------*/
 
     /*para esconder input */
-    section .container .column.is-9 .checkDisplay {
+    section .container .column.is-9 .checkDisplayDependente {
+        display: none;
+    } 
+    section .container .column.is-9 .checkDisplayPensao {
         display: none;
     } 
 
