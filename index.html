@@ -75,15 +75,15 @@
             <div class="field" id="nome">
               <label class="label">Nome</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input ValidacaoNome" type="text" placeholder="Text input" value="" id="inNome" name="ValidacaoFormNome">
+                <input class="input ValidacaoNome outValidacaoBorda" type="text" placeholder="Text input" value="" id="inNome" name="ValidacaoFormNome">
                 <span class="icon is-small is-left">
                   <i class="fas fa-user"></i>
                 </span>
-                <span class="icon is-small is-right">
-                  <i class="fas fa-exclamation-triangle ValidacaoIcon"></i>
+                <span class="icon is-small is-right ValidacaoIcon" id="outValidacaoNomeIcon">
+                  <i class="fas fa-exclamation-triangle"></i>
                 </span>
               </div>
-              <p class="help is-danger ValidacaoHelp">Por favor, preencha corretamente o formulário...</p>
+              <p class="help is-danger ValidacaoHelp" id="outValidacaoNomeHelp"></p>
             </div>
 
             <div class="field">
@@ -91,7 +91,7 @@
               <div class="control has-icons-left">
                 <input
                   class="input"
-                  type="number"
+                  type="text"
                   placeholder="Income input"
                   value=""
                   id="inSalBruto"

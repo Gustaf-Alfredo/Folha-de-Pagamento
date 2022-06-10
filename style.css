@@ -116,5 +116,21 @@ section .container .title.is-4 {
 }
 
 .column.is-9 .field#nome .ValidacaoIcon {
-   /*  display: none; */
+    display: none; 
 }
+
+
+
+/* resete css para input */
+textarea:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+} 
+
+/* .column.is-9 .field#nome .ValidacaoBorda {
+    background-color: #fff;
+    border-color: #dbdbdb;
+    border-radius: 4px;
+    color: #363636;
+} */
