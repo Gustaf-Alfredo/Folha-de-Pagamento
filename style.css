@@ -115,7 +115,11 @@ section .container .title.is-4 {
     /* display: none; */
 }
 
-.column.is-9 .field#nome .ValidacaoIcon {
+.column.is-9 .field#nome .ValidacaoNomeIcon {
+    display: none; 
+}
+
+.column.is-9 .field#SalBruto .ValidacaoSalBrutoIcon {
     display: none; 
 }
 

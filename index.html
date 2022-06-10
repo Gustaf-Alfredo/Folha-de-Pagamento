@@ -75,18 +75,33 @@
             <div class="field" id="nome">
               <label class="label">Nome</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input ValidacaoNome outValidacaoBorda" type="text" placeholder="Text input" value="" id="inNome" name="ValidacaoFormNome">
+                <input class="input ValidacaoNome outValidacaoBordaNome" type="text" placeholder="Text input" value="" id="inNome" name="ValidacaoFormNome">
                 <span class="icon is-small is-left">
                   <i class="fas fa-user"></i>
                 </span>
-                <span class="icon is-small is-right ValidacaoIcon" id="outValidacaoNomeIcon">
+                <span class="icon is-small is-right ValidacaoNomeIcon" id="outValidacaoNomeIcon">
                   <i class="fas fa-exclamation-triangle"></i>
                 </span>
               </div>
-              <p class="help is-danger ValidacaoHelp" id="outValidacaoNomeHelp"></p>
+              <p class="help is-danger ValidacaoNomeHelp" id="outValidacaoNomeHelp"></p>
             </div>
+            
 
-            <div class="field">
+            
+            <div class="field" id="SalBruto">
+              <label class="label">Salário Bruto</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input ValidacaoSalBruto outValidacaoBordaSalBruto" type="text" placeholder="Text input" value="" id="inSalBruto" name="ValidacaoFormSalBruto">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-city"></i>
+                </span>
+                <span class="icon is-small is-right ValidacaoSalBrutoIcon" id="outValidacaoSalBrutoIcon">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </div>
+              <p class="help is-danger ValidacaoSalBrutoHelp" id="outValidacaoSalBrutoHelp"></p>
+            </div>
+            <!-- <div class="field">
               <label class="label">Salário Bruto</label>
               <div class="control has-icons-left">
                 <input
@@ -102,8 +117,10 @@
                 <span class="icon is-small is-left">
                   <i class="fas fa-city"></i>
                 </span>
+
+                
               </div>
-            </div>
+            </div> -->
 
             <!-- Mesma div os dois checkbox -->
             <div class="flexboxCheck">

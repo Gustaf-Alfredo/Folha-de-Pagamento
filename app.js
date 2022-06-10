@@ -17,9 +17,14 @@
     const btLimpar = document.getElementById('btLimpar');
 
     //resposta de validação - outValidacao
-    const outValidacaoNomeHelp = document.getElementById('outValidacaoNomeHelp');
-    const outValidacaoNomeIcon = document.getElementById('outValidacaoNomeIcon');
-    const outValidacaoBorda = document.querySelector(".outValidacaoBorda")
+        //Nome
+            const outValidacaoNomeHelp = document.getElementById('outValidacaoNomeHelp');
+            const outValidacaoNomeIcon = document.getElementById('outValidacaoNomeIcon');
+            const outValidacaoBordaNome = document.querySelector(".outValidacaoBordaNome")
+        //SalBruto
+            const outValidacaoSalBrutoHelp = document.getElementById('outValidacaoSalBrutoHelp');
+            const outValidacaoSalBrutoIcon = document.getElementById('outValidacaoSalBrutoIcon');
+            const outValidacaoBordaSalBruto = document.querySelector(".outValidacaoBordaSalBruto")
 
     //resposta do programa - out
     const outResposta = document.getElementById('outResposta');
@@ -36,30 +41,39 @@
         if(nome == "") {
             inNome.style.border = '2px solid #FF2B56';
             outValidacaoNomeHelp.textContent = 'Por favor, preencha corretamente o formulário...' ;           
-            outValidacaoNomeIcon.classList.remove("ValidacaoIcon");
+            outValidacaoNomeIcon.classList.remove("ValidacaoNomeIcon");
         } else
     //validação para salário bruto
-        if (salBruto >= 0) {
-            
-            window.alert('erro')
-           
+        if (salBruto <= 0  || salBruto == "" || isNaN(salBruto)) {
+           inSalBruto.style.border = '2px solid #FF2B56';
+           outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500,50';
+           outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
         }
-        console.log(salBruto)
     }
 
+
+    //funções de reset
     function resetNome() {
         inNome.style.border = 'none';
-        outValidacaoBorda.style.border = '0.1px solid #dbdbdb';
-        outValidacaoNomeHelp.textContent = ''
-        outValidacaoNomeIcon.classList.add('ValidacaoIcon');
+        outValidacaoBordaNome.style.border = '0.1px solid #dbdbdb';
+        outValidacaoNomeHelp.textContent = '';
+        outValidacaoNomeIcon.classList.add('ValidacaoNomeIcon');
     } 
+
+    function resetSalBruto() {
+        inSalBruto.style.border = 'none';
+        outValidacaoBordaSalBruto.style.border = '0.1px solid #dbdbdb';
+        outValidacaoSalBrutoHelp.textContent = '';
+        outValidacaoSalBrutoIcon.classList.add('ValidacaoSalBrutoIcon');
+    }
 
 
 
 
     //acionamento de eventos
     btCalcular.addEventListener("click", calcular);
-    inNome.addEventListener("click", resetNome)
+    inNome.addEventListener("click", resetNome);
+    inSalBruto.addEventListener("click", resetSalBruto);
 
 
 
