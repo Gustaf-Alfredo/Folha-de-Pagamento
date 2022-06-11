@@ -134,6 +134,10 @@ section .container .title.is-4 {
     display: none;
 }
 
+/* .column.is-9 .displayDescontosIndividuais {
+    display: none;
+} */
+
 .column.is-9 .formatacaoText {
 }
 

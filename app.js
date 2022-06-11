@@ -31,6 +31,7 @@
 
     //resposta do programa - out
     const outFuncionario = document.getElementById('outFuncionario');
+    const outDescontosIndividual = document.getElementById('outDescontosIndividual');
 
     //criação de vetor global
     let Funcionarios = []
@@ -43,6 +44,7 @@
         let salBruto = Number(inSalBruto.value);
         let dependente = Number(inDependente.value);
         let pensao = Number(inPensao.value);
+        let descontoINSS = Number()
 
     //validação para nome
         if(nome == "") {
@@ -69,9 +71,39 @@
             checkNaoPensao();
             inNome.focus();
             folhaIndividual();
-            // PARA TESTE DE FUNCIONAMENTO => console.log(Funcionarios);
-            return          
+            // PARA TESTE DE FUNCIONAMENTO => console.log(Funcionarios);          
         }
+
+        function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4) {
+            //taxas do INSS
+                let taxaINSS1 = 0.075
+                let taxaINSS2 = 0.09
+                let taxaINSS3 = 0.12
+                let taxaINSS4 = 0.14
+            //validação
+                if (salBruto < tetoINSS1) {
+                    descontoINSS = salBruto * taxaINSS1
+                } else
+                if (salBruto >= tetoINSS1 && salBruto < tetoINSS2) {
+                    descontoINSS = salBruto * taxaINSS2
+                } else 
+                if (salBruto >= tetoINSS2 && salBruto < tetoINSS3) {
+                    descontoINSS = salBruto * taxaINSS3
+                } else
+                if (salBruto >= tetoINSS3 && salBruto < tetoINSS4) {
+                    descontoINSS = salBruto * taxaINSS4
+                } else 
+                if (salBruto >= tetoINSS4) {
+                    descontoINSS = tetoINSS4 * taxaINSS4
+                }
+                //INSSdesconto - função
+                //descontoINSS - variável
+        } 
+
+        /* outDescontosIndividual.classList.remove('displayDescontosIndividuais')
+                outDescontosIndividual.textContent = `Desconto INSS(R$): ${descontoINSS}` */
+        //valores de tetoINSS
+        tetoINSS(1212.01, 2427.35, 3641.03, 7087.22)
     }
 
 
@@ -82,7 +114,7 @@
             lista = `Ficha individual\n
             Nome: ${Funcionarios[i].funcionario}\n
             Salário: ${Funcionarios[i].salario}\n
-            Possui dependentes: ${Funcionarios[0].dependente}\n
+            Possui dependentes: ${Funcionarios[i].dependente}\n
             Paga pensão: ${Funcionarios[i].valorPensao}`;
         }
         outFuncionario.innerText = lista;
