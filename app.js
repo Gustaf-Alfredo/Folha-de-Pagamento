@@ -96,10 +96,6 @@
         checkPensaoSim.checked = "";
     }
 
-
-
-
-
     function Limpar() {
         inNome.value = '';
         inSalBruto.value = '';
