@@ -78,31 +78,8 @@
             folhaIndividual();
             // PARA TESTE DE FUNCIONAMENTO => console.log(Funcionarios);          
         }
-
-        let descontoINSS = Number()
-            //validação
-                if (salBruto < tetoINSS1) {
-                    descontoINSS = salBruto * taxaINSS1
-                } else
-                if (salBruto >= tetoINSS1 && salBruto < tetoINSS2) {
-                    descontoINSS = salBruto * taxaINSS2
-                } else 
-                if (salBruto >= tetoINSS2 && salBruto < tetoINSS3) {
-                    descontoINSS = salBruto * taxaINSS3
-                } else
-                if (salBruto >= tetoINSS3 && salBruto < tetoINSS4) {
-                    descontoINSS = salBruto * taxaINSS4
-                } else 
-                if (salBruto >= tetoINSS4) {
-                    descontoINSS = tetoINSS4 * taxaINSS4
-                }
-                //INSSdesconto - função
-                //descontoINSS - variável
-        } 
-        INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22)
-
-        console.log(descontoINSS)
-        /* function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4) {
+    } 
+        function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4) {
             //taxas do INSS
                 let taxaINSS1 = 0.075
                 let taxaINSS2 = 0.09
@@ -110,26 +87,32 @@
                 let taxaINSS4 = 0.14
 
             let descontoINSS = Number()
+            let salBruto = Number(inSalBruto.value);
             //validação
                 if (salBruto < tetoINSS1) {
                     descontoINSS = salBruto * taxaINSS1
-                } else
+                    return descontoINSS
+                } else 
                 if (salBruto >= tetoINSS1 && salBruto < tetoINSS2) {
                     descontoINSS = salBruto * taxaINSS2
-                } else 
+                    return descontoINSS
+                } else
                 if (salBruto >= tetoINSS2 && salBruto < tetoINSS3) {
                     descontoINSS = salBruto * taxaINSS3
+                    return descontoINSS
                 } else
                 if (salBruto >= tetoINSS3 && salBruto < tetoINSS4) {
                     descontoINSS = salBruto * taxaINSS4
-                } else 
+                    return descontoINSS
+                } else
                 if (salBruto >= tetoINSS4) {
                     descontoINSS = tetoINSS4 * taxaINSS4
-                }
+                    return descontoINSS
+                } else
                 //INSSdesconto - função
                 //descontoINSS - variável
-        }  */
-        
+                console.log(descontoINSS)
+        }  
         /* outDescontosIndividual.classList.remove('displayDescontosIndividuais')
                 outDescontosIndividual.textContent = `Desconto INSS(R$): ${descontoINSS}` */
         //valores de tetoINSS
