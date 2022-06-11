@@ -40,11 +40,6 @@
         let nome = inNome.value;
         let salBruto = Number(inSalBruto.value);
 
-        /* let DependenteSim = checkDependeteSim.checked;
-        let DependenteNao = checkDependeteNao.checked;
-        let PensaoSim = checkPensaoSim.checked;
-        let PensaoNao = checkPensaoNao.checked; */
-
     //validação para nome
         if(nome == "") {
             inNome.style.border = '2px solid #FF2B56';
@@ -62,44 +57,49 @@
 
 
     //funções de reset
-    function resetNome() {
-        inNome.style.border = 'none';
-        outValidacaoBordaNome.style.border = '0.1px solid #dbdbdb';
-        outValidacaoNomeHelp.textContent = '';
-        outValidacaoNomeIcon.classList.add('ValidacaoNomeIcon');
-    } 
+        //nome
+            function resetNome() {
+                inNome.style.border = 'none';
+                outValidacaoBordaNome.style.border = '0.1px solid #dbdbdb';
+                outValidacaoNomeHelp.textContent = '';
+                outValidacaoNomeIcon.classList.add('ValidacaoNomeIcon');
+            } 
+        //SalBruto
+            function resetSalBruto() {
+                inSalBruto.style.border = 'none';
+                outValidacaoBordaSalBruto.style.border = '0.1px solid #dbdbdb';
+                outValidacaoSalBrutoHelp.textContent = '';
+                outValidacaoSalBrutoIcon.classList.add('ValidacaoSalBrutoIcon');
+            }
+    //checkmark(função) - Dependetes e Pensao
+        function checkSimDependente() {
+            DependenteDisplay.classList.remove('checkDisplayDependente');
+            checkDependenteNao.checked = "";
+        } 
 
-    function resetSalBruto() {
-        inSalBruto.style.border = 'none';
-        outValidacaoBordaSalBruto.style.border = '0.1px solid #dbdbdb';
-        outValidacaoSalBrutoHelp.textContent = '';
-        outValidacaoSalBrutoIcon.classList.add('ValidacaoSalBrutoIcon');
-    }
+        function checkNaoDependente() {
+            DependenteDisplay.classList.add('checkDisplayDependente');
+            checkDependenteSim.checked = "";
+        }
 
-    function checkSimDependente() {
-        DependenteDisplay.classList.remove('checkDisplayDependente');
-        checkDependenteNao.checked = "";
-    } 
+        function checkSimPensao() {
+            PensaoDisplay.classList.remove('checkDisplayPensao');
+            checkPensaoNao.checked = "";
+        }
 
-    function checkNaoDependente() {
-        DependenteDisplay.classList.add('checkDisplayDependente');
-        checkDependenteSim.checked = "";
-    }
+        function checkNaoPensao() {
+            PensaoDisplay.classList.add('checkDisplayPensao');
+            checkPensaoSim.checked = "";
+        }
 
-    function checkSimPensao() {
-        PensaoDisplay.classList.remove('checkDisplayPensao');
-        checkPensaoNao.checked = "";
-    }
-
-    function checkNaoPensao() {
-        PensaoDisplay.classList.add('checkDisplayPensao');
-        checkPensaoSim.checked = "";
-    }
+    //função de limpar o formulário
 
     function Limpar() {
         inNome.value = '';
         inSalBruto.value = '';
     }
+
+    
     //acionamento de eventos
         //botões
             btCalcular.addEventListener("click", calcular);
