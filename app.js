@@ -82,11 +82,12 @@
 
      function folhaIndividual() {
         outFuncionario.classList.remove('displayVetorFuncionario')
-        outFuncionario.innerText = `Folha de pagamento\n
+        outFuncionario.innerText = `Ficha individual\n
                                     Nome: ${Funcionarios[0].funcionario}\n
                                     Salário: ${Funcionarios[0].salario}\n
                                     Possui dependentes: ${Funcionarios[0].dependente}\n
                                     Paga pensão: ${Funcionarios[0].valorPensao}`
+                                    //falta colocar para mudar de acordo com a adição de novos funcionários
     } 
 
     //funções de reset
