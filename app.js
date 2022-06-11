@@ -32,6 +32,8 @@
     //resposta do programa - out
     const outResposta = document.getElementById('outResposta');
 
+    //criação de vetor global
+    let Funcionarios = []
 
 
 //iniciando programa
@@ -51,7 +53,11 @@
            inSalBruto.style.border = '2px solid #FF2B56';
            outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500,50';
            outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
+        } else {
+            Funcionarios.push({funcionario: nome, salario: salBruto});          
         }
+        console.log(Funcionarios)
+        
 
     }
 
@@ -99,7 +105,7 @@
         inSalBruto.value = '';
     }
 
-    
+
     //acionamento de eventos
         //botões
             btCalcular.addEventListener("click", calcular);
