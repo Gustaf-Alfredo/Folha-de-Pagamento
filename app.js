@@ -30,7 +30,7 @@
             const PensaoDisplay = document.getElementById('PensaoDisplay');
 
     //resposta do programa - out
-    const outResposta = document.getElementById('outResposta');
+    const outFuncionario = document.getElementById('outFuncionario');
 
     //criação de vetor global
     let Funcionarios = []
@@ -41,6 +41,8 @@
     //puxando valores
         let nome = inNome.value;
         let salBruto = Number(inSalBruto.value);
+        let dependente = Number(inDependente.value);
+        let pensao = Number(inPensao.value);
 
     //validação para nome
         if(nome == "") {
@@ -54,13 +56,38 @@
            outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500,50';
            outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
         } else {
-            Funcionarios.push({funcionario: nome, salario: salBruto});          
+            
+            //recebendo informação de checkmark
+            let Dependencheck = checkDependenteSim.checked;
+            //enviando dados para o vetor => nome e salBruto
+            Funcionarios.push({funcionario: nome, salario: salBruto, dependente: Dependencheck, numeroDependente: dependente, valorPensao: pensao});
+            inNome.value = '';
+            inSalBruto.value = '';
+            inDependente.value = '';
+            inPensao.value = '';
+            checkNaoDependente()
+            checkNaoPensao();
+            inNome.focus();
+            folhaIndividual();
+            console.log(Funcionarios)
+            return          
         }
-        console.log(Funcionarios)
+
+        
+        
         
 
     }
 
+
+     function folhaIndividual() {
+        outFuncionario.classList.remove('displayVetorFuncionario')
+        outFuncionario.innerText = `Folha de pagamento\n
+                                    Nome: ${Funcionarios[0].funcionario}\n
+                                    Salário: ${Funcionarios[0].salario}\n
+                                    Possui dependentes: ${Funcionarios[0].dependente}\n
+                                    Paga pensão: ${Funcionarios[0].valorPensao}`
+    } 
 
     //funções de reset
         //nome
@@ -81,6 +108,7 @@
         function checkSimDependente() {
             DependenteDisplay.classList.remove('checkDisplayDependente');
             checkDependenteNao.checked = "";
+            inDependente.focus();
         } 
 
         function checkNaoDependente() {
@@ -91,6 +119,7 @@
         function checkSimPensao() {
             PensaoDisplay.classList.remove('checkDisplayPensao');
             checkPensaoNao.checked = "";
+            inPensao.focus();
         }
 
         function checkNaoPensao() {
