@@ -69,25 +69,24 @@
             checkNaoPensao();
             inNome.focus();
             folhaIndividual();
-            console.log(Funcionarios)
+            // PARA TESTE DE FUNCIONAMENTO => console.log(Funcionarios);
             return          
         }
-
-        
-        
-        
-
     }
 
 
      function folhaIndividual() {
-        outFuncionario.classList.remove('displayVetorFuncionario')
-        outFuncionario.innerText = `Ficha individual\n
-                                    Nome: ${Funcionarios[0].funcionario}\n
-                                    Salário: ${Funcionarios[0].salario}\n
-                                    Possui dependentes: ${Funcionarios[0].dependente}\n
-                                    Paga pensão: ${Funcionarios[0].valorPensao}`
-                                    //falta colocar para mudar de acordo com a adição de novos funcionários
+        outFuncionario.classList.remove('displayVetorFuncionario');
+        let FichaIndividual = '';
+        for(let i = 0; i < Funcionarios.length; i++) {
+            lista = `Ficha individual\n
+            Nome: ${Funcionarios[i].funcionario}\n
+            Salário: ${Funcionarios[i].salario}\n
+            Possui dependentes: ${Funcionarios[0].dependente}\n
+            Paga pensão: ${Funcionarios[i].valorPensao}`;
+        }
+        outFuncionario.innerText = lista;
+                                   
     } 
 
     //funções de reset
