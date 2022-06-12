@@ -36,21 +36,13 @@
     //criação de vetor global
     let Funcionarios = []
 
-
 //iniciando programa
-    function calcular (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4) {
-
-    //taxas do INSS
-        let taxaINSS1 = 0.075
-        let taxaINSS2 = 0.09
-        let taxaINSS3 = 0.12
-        let taxaINSS4 = 0.14
+   function calcular () {
     //puxando valores
         let nome = inNome.value;
         let salBruto = Number(inSalBruto.value);
         let dependente = Number(inDependente.value);
         let pensao = Number(inPensao.value);
-
     //validação para nome
         if(nome == "") {
             inNome.style.border = '2px solid #FF2B56';
@@ -62,61 +54,33 @@
            inSalBruto.style.border = '2px solid #FF2B56';
            outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500,50';
            outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
-        } else {
-            
+        } else {        
             //recebendo informação de checkmark
-            let Dependencheck = checkDependenteSim.checked;
+            let Dependentecheck = checkDependenteSim.checked;
+            let Pensaocheck = checkPensaoSim.checked;
             //enviando dados para o vetor => nome e salBruto
-            Funcionarios.push({funcionario: nome, salario: salBruto, dependente: Dependencheck, numeroDependente: dependente, valorPensao: pensao});
-            inNome.value = '';
-            inSalBruto.value = '';
-            inDependente.value = '';
-            inPensao.value = '';
+            Funcionarios.push({funcionario: nome, salario: salBruto, dependente: Dependentecheck, numeroDependente: dependente, pensao: Pensaocheck,valorPensao: pensao});           
             checkNaoDependente()
-            checkNaoPensao();
-            inNome.focus();
+            checkNaoPensao();          
             folhaIndividual();
-            // PARA TESTE DE FUNCIONAMENTO => console.log(Funcionarios);          
+            inNome.focus();         
+            let INSSdescontoVariavel = INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22,0.075,0.09,0.12,0.14);//tetoINSS1 à tetoINSS4 e taxaINSS1 à taxaINSS4         
+            /*
+            taxas do INSS
+                taxaINSS1 = 0.075
+                taxaINSS2 = 0.09
+                taxaINSS3 = 0.12
+                taxaINSS4 = 0.14 
+            */
+            /* console.log(Funcionarios);  */  
+            return salBruto       
         }
-    } 
-        function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4) {
-            //taxas do INSS
-                let taxaINSS1 = 0.075
-                let taxaINSS2 = 0.09
-                let taxaINSS3 = 0.12
-                let taxaINSS4 = 0.14
 
-            let descontoINSS = Number()
-            let salBruto = Number(inSalBruto.value);
-            //validação
-                if (salBruto < tetoINSS1) {
-                    descontoINSS = salBruto * taxaINSS1
-                    return descontoINSS
-                } else 
-                if (salBruto >= tetoINSS1 && salBruto < tetoINSS2) {
-                    descontoINSS = salBruto * taxaINSS2
-                    return descontoINSS
-                } else
-                if (salBruto >= tetoINSS2 && salBruto < tetoINSS3) {
-                    descontoINSS = salBruto * taxaINSS3
-                    return descontoINSS
-                } else
-                if (salBruto >= tetoINSS3 && salBruto < tetoINSS4) {
-                    descontoINSS = salBruto * taxaINSS4
-                    return descontoINSS
-                } else
-                if (salBruto >= tetoINSS4) {
-                    descontoINSS = tetoINSS4 * taxaINSS4
-                    return descontoINSS
-                } else
-                //INSSdesconto - função
-                //descontoINSS - variável
-                console.log(descontoINSS)
-        }  
+    } //FIM da função Calcular
+   
         /* outDescontosIndividual.classList.remove('displayDescontosIndividuais')
                 outDescontosIndividual.textContent = `Desconto INSS(R$): ${descontoINSS}` */
         //valores de tetoINSS
-       /*  INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22) */
 
     //}
 
@@ -134,7 +98,6 @@
         outFuncionario.innerText = lista;
                                    
     } 
-
     //funções de reset
         //nome
             function resetNome() {
@@ -178,9 +141,42 @@
     function Limpar() {
         inNome.value = '';
         inSalBruto.value = '';
+        inDependente.value = '';
+        inPensao.value = ''; 
     }
+    //funções de cálculos
+        //Cálcuco INSS
+            function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4,taxaINSS1,taxaINSS2,taxaINSS3,taxaINSS4) {
+                let descontoINSS = Number();
+                let SalBrutoGlobal = inSalBruto.value;
+                console.log(SalBrutoGlobal)
+                
+                //validação
+                    if (SalBrutoGlobal < tetoINSS1) {
+                        descontoINSS = SalBrutoGlobal * taxaINSS1
+                    } else 
+                    if (SalBrutoGlobal >= tetoINSS1 && SalBrutoGlobal < tetoINSS2) {
+                        descontoINSS = SalBrutoGlobal * taxaINSS2
+                    } else
+                    if (SalBrutoGlobal >= tetoINSS2 && SalBrutoGlobal < tetoINSS3) {
+                        descontoINSS = SalBrutoGlobal * taxaINSS3
+                    } else
+                    if (SalBrutoGlobal >= tetoINSS3 && SalBrutoGlobal < tetoINSS4) {
+                        descontoINSS = SalBrutoGlobal * taxaINSS4               
+                    } else
+                    if (SalBrutoGlobal >= tetoINSS4) {
+                        descontoINSS = tetoINSS4 * taxaINSS4              
+                    }
+                    //INSSdesconto - função
+                    //descontoINSS - variável
+                    return descontoINSS
+            }
 
+            //Cálculo IRPF
+            function IRPFdesconto() {
+                let INSSdescontoVariavel = INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22,0.075,0.09,0.12,0.14);//tetoINSS1 à tetoINSS4 e taxaINSS1 à taxaINSS4 
 
+            }
     //acionamento de eventos
         //botões
             btCalcular.addEventListener("click", calcular);
