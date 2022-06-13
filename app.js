@@ -74,7 +74,6 @@
             function IRPFdesconto(tetoIRPF1, tetoIRPF2, tetoIRPF3, tetoIRPF4, taxaIRPF1, taxaIRPF2, taxaIRPF3, taxaIRPF4,deducoesIRPF1,deducoesIRPF2,deducoesIRPF3,deducoesIRPF4) { 
                 //validação
                 SalBrutoGlobalDescINSS = salBruto - descontoINSS;
-                console.log(SalBrutoGlobalDescINSS)
                     if( SalBrutoGlobalDescINSS < tetoIRPF1) {
                         descontoIRPF = 0
                     } else 
@@ -116,12 +115,12 @@
             let Dependentecheck = checkDependenteSim.checked;
             let Pensaocheck = checkPensaoSim.checked;
             //enviando dados para o vetor => nome e salBruto
-            Funcionarios.push({funcionario: nome, salario: salBruto, dependente: Dependentecheck, numeroDependente: dependente, pensao: Pensaocheck,valorPensao: pensao});           
+            Funcionarios.push({funcionario: nome, salario: salBruto, dependente: Dependentecheck, numeroDependente: dependente, pensao: Pensaocheck,valorPensao: pensao, descontoINSS: descontoINSS, descontoIRPF: descontoIRPF});  
+            console.log(Funcionarios)         
             checkNaoDependente()
             checkNaoPensao();          
             folhaIndividual();
             inNome.focus();       
-            /* calcular() */
     }
         function folhaIndividual() {
             outFuncionario.classList.remove('displayVetorFuncionario');
@@ -131,7 +130,10 @@
                 Nome: ${Funcionarios[i].funcionario}\n
                 Salário: ${Funcionarios[i].salario}\n
                 Possui dependentes: ${Funcionarios[i].dependente}\n
-                Paga pensão: ${Funcionarios[i].valorPensao}`;
+                Paga pensão: ${Funcionarios[i].valorPensao}\n
+                Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toFixed(2)}\n
+                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toFixed(2)}`;
+                
             }
             outFuncionario.innerText = lista;
                                        
