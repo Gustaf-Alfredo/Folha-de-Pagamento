@@ -38,32 +38,80 @@
 
 //iniciando programa
 
- 
-   function calcular () {
-    //puxando valores
-        let nome = inNome.value;
-        let salBruto = Number(inSalBruto.value);
-        let dependente = Number(inDependente.value);
-        let pensao = Number(inPensao.value);
+ function calcular () {
+    //valores de escopo maior
+    let nome = inNome.value;
+    let salBruto = Number(inSalBruto.value);
+    let dependente = Number(inDependente.value);
+    let pensao = Number(inPensao.value);
+    let descontoINSS = Number();
+    let descontoIRPF = Number();
+    let SalBrutoGlobalDescINSS = Number()
+     //funções de cálculos
+            //Cálculo INSS
+            function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4,taxaINSS1,taxaINSS2,taxaINSS3,taxaINSS4) {
+                //validação
+                    if (salBruto < tetoINSS1) {
+                        descontoINSS = salBruto * taxaINSS1
+                    } else 
+                    if (salBruto >= tetoINSS1 && salBruto < tetoINSS2) {
+                        descontoINSS = salBruto * taxaINSS2
+                    } else
+                    if (salBruto >= tetoINSS2 && salBruto < tetoINSS3) {
+                        descontoINSS = salBruto * taxaINSS3
+                    } else
+                    if (salBruto >= tetoINSS3 && salBruto < tetoINSS4) {
+                        descontoINSS = salBruto * taxaINSS4               
+                    } else
+                    if (salBruto >= tetoINSS4) {
+                        descontoINSS = tetoINSS4 * taxaINSS4              
+                    } return descontoINSS
+                    //INSSdesconto - função
+                    //descontoINSS - variável
+            }
+
+            //Cálculo IRPF
+            function IRPFdesconto(tetoIRPF1, tetoIRPF2, tetoIRPF3, tetoIRPF4, taxaIRPF1, taxaIRPF2, taxaIRPF3, taxaIRPF4,deducoesIRPF1,deducoesIRPF2,deducoesIRPF3,deducoesIRPF4) { 
+                //validação
+                SalBrutoGlobalDescINSS = salBruto - descontoINSS;
+                console.log(SalBrutoGlobalDescINSS)
+                    if( SalBrutoGlobalDescINSS < tetoIRPF1) {
+                        descontoIRPF = 0
+                    } else 
+                    if ( SalBrutoGlobalDescINSS >= tetoIRPF1 &&  SalBrutoGlobalDescINSS < tetoIRPF2) {    
+                        descontoIRPF = (SalBrutoGlobalDescINSS * taxaIRPF1) - deducoesIRPF1
+                    } else
+                    if (SalBrutoGlobalDescINSS >= tetoIRPF2 && SalBrutoGlobalDescINSS < tetoIRPF3) {                      
+                        descontoIRPF = (SalBrutoGlobalDescINSS * taxaIRPF2) - deducoesIRPF2
+                    } else 
+                    if (SalBrutoGlobalDescINSS >= tetoIRPF3 && SalBrutoGlobalDescINSS < tetoIRPF4) {                      
+                        descontoIRPF = (SalBrutoGlobalDescINSS * taxaIRPF3) - deducoesIRPF3
+                    } else
+                    if (SalBrutoGlobalDescINSS >= tetoIRPF4) {                 
+                        descontoIRPF = (SalBrutoGlobalDescINSS * taxaIRPF4) - deducoesIRPF4                       
+                    } 
+                    return descontoIRPF
+                    //IRPFdesconto - função
+                    //descontoIRPF - variável
+            }
+    let INSSdescontoVariavel = INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22,/**/0.075,0.09,0.12,0.14);
+    //tetoINSS1 à tetoINSS4 //taxaINSS1 à taxaINSS4 //
+    let IRPFdescontoVariavel = IRPFdesconto(1903.98, 2826.66,3751.06,4664.68,/**/0.075,0.15,0.225,0.275,/**/142.8,354.8,636.13,869.36);
+    //tetoIRPF1 à tetoIRPF4 // taxaIRPF1 à taxaIRPF4 // deducoesIRPF1 à deducoesIRPF4 //
 
 
-        function teste() {
-            let testenome = nome
-            console.log(testenome)
-        }
-        
     //validação para nome
-        if(nome == "") {
-            inNome.style.border = '2px solid #FF2B56';
-            outValidacaoNomeHelp.textContent = 'Por favor, preencha corretamente o formulário...' ;           
-            outValidacaoNomeIcon.classList.remove("ValidacaoNomeIcon");
-        } 
+    if(nome == "") {
+        inNome.style.border = '2px solid #FF2B56';
+        outValidacaoNomeHelp.textContent = 'Por favor, preencha corretamente o formulário...' ;           
+        outValidacaoNomeIcon.classList.remove("ValidacaoNomeIcon");
+    } 
     //validação para salário bruto
         if (salBruto <= 0  || salBruto == "" || isNaN(salBruto)) {
-           inSalBruto.style.border = '2px solid #FF2B56';
-           outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500,50';
-           outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
-        } else {        
+        inSalBruto.style.border = '2px solid #FF2B56';
+        outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500,50';
+        outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
+        } else  {        
             //recebendo informação de checkmark
             let Dependentecheck = checkDependenteSim.checked;
             let Pensaocheck = checkPensaoSim.checked;
@@ -72,53 +120,29 @@
             checkNaoDependente()
             checkNaoPensao();          
             folhaIndividual();
-            inNome.focus();
-            teste()         
-            let INSSdescontoVariavel = INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22,0.075,0.09,0.12,0.14);//tetoINSS1 à tetoINSS4 e taxaINSS1 à taxaINSS4      
-            /* let IRPFdescontoVariavel = IRPFdesconto(1903.98, 2826.66,3751.06,4664.68,0.075,0.15,0.225,0.275) */
-            /*
-            taxas do INSS
-                taxaINSS1 = 0.075
-                taxaINSS2 = 0.09
-                taxaINSS3 = 0.12
-                taxaINSS4 = 0.14 
-            */
-            /* console.log(Funcionarios);  */       
-            
-            class App {
-                constructor(nome, salBruto, INSSdescontoVariavel) {
-                    this.nome = nome;
-                    this.salBruto = salBruto;
-                    this.INSSdescontoVariavel = INSSdescontoVariavel;
-                }
-            } 
-    
-            const pessoa1 = new App(nome, salBruto, INSSdescontoVariavel) 
-    
-            console.log(pessoa1)
-        }
+            inNome.focus();       
+            /* calcular() */
+    }
+        function folhaIndividual() {
+            outFuncionario.classList.remove('displayVetorFuncionario');
+            let FichaIndividual = '';
+            for(let i = 0; i < Funcionarios.length; i++) {
+                lista = `Ficha individual\n
+                Nome: ${Funcionarios[i].funcionario}\n
+                Salário: ${Funcionarios[i].salario}\n
+                Possui dependentes: ${Funcionarios[i].dependente}\n
+                Paga pensão: ${Funcionarios[i].valorPensao}`;
+            }
+            outFuncionario.innerText = lista;
+                                       
+        } 
+ } //FIM  DA FUNCAO CALCULAR
 
-        
 
-        return salBruto
-    } //FIM da função Calcular
 
-    
-     function folhaIndividual() {
-        outFuncionario.classList.remove('displayVetorFuncionario');
-        let FichaIndividual = '';
-        for(let i = 0; i < Funcionarios.length; i++) {
-            lista = `Ficha individual\n
-            Nome: ${Funcionarios[i].funcionario}\n
-            Salário: ${Funcionarios[i].salario}\n
-            Possui dependentes: ${Funcionarios[i].dependente}\n
-            Paga pensão: ${Funcionarios[i].valorPensao}`;
-        }
-        outFuncionario.innerText = lista;
-                                   
-    } 
-    //funções de reset
-        //nome
+
+  //funções de reset
+            //nome
             function resetNome() {
                 inNome.style.border = 'none';
                 outValidacaoBordaNome.style.border = '0.1px solid #dbdbdb';
@@ -157,65 +181,14 @@
 
     //função de limpar o formulário
 
+    
     function Limpar() {
         inNome.value = '';
         inSalBruto.value = '';
         inDependente.value = '';
         inPensao.value = ''; 
     }
-    //funções de cálculos
-        //Cálcuco INSS
-            function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4,taxaINSS1,taxaINSS2,taxaINSS3,taxaINSS4) {
-                let descontoINSS = Number();
-                let SalBrutoGlobal = inSalBruto.value;
-               /*  console.log(SalBrutoGlobal) */
-                
-                //validação
-                    if (SalBrutoGlobal < tetoINSS1) {
-                        descontoINSS = SalBrutoGlobal * taxaINSS1
-                    } else 
-                    if (SalBrutoGlobal >= tetoINSS1 && SalBrutoGlobal < tetoINSS2) {
-                        descontoINSS = SalBrutoGlobal * taxaINSS2
-                    } else
-                    if (SalBrutoGlobal >= tetoINSS2 && SalBrutoGlobal < tetoINSS3) {
-                        descontoINSS = SalBrutoGlobal * taxaINSS3
-                    } else
-                    if (SalBrutoGlobal >= tetoINSS3 && SalBrutoGlobal < tetoINSS4) {
-                        descontoINSS = SalBrutoGlobal * taxaINSS4               
-                    } else
-                    if (SalBrutoGlobal >= tetoINSS4) {
-                        descontoINSS = tetoINSS4 * taxaINSS4              
-                    }
-                    //INSSdesconto - função
-                    //descontoINSS - variável
-                    return descontoINSS
-            }
-
-            //Cálculo IRPF
-            function IRPFdesconto(tetoIRPF1, tetoIRPF2, tetoIRPF3, tetoIRPF4, taxaIRPF1, taxaIRPF2, taxaIRPF3, taxaIRPF4) {
-                /* let descontoINSS */ 
-                let descontoIRPF = Number();
-                let SalBrutoGlobal = inSalBruto.value;
-                /* let SalBrutoGlobalDescINSS = SalBrutoGlobal - descontoINSS; */ //descontoINSS nao recebe valor
-
-
-                //validação
-                    if( SalBrutoGlobalDescINSS < tetoIRPF1) {
-                        descontoIRPF = 0
-                    } else 
-                    if ( SalBrutoGlobalDescINSS >= tetoIRPF1 &&  SalBrutoGlobalDescINSS < tetoIRPF2) {
-                        descontoIRPF = SalBrutoGlobalDescINSS * taxaIRPF1
-                    } else
-                    if (SalBrutoGlobalDescINSS >= tetoIRPF2 && SalBrutoGlobalDescINSS < tetoIRPF3) {
-                        descontoIRPF = SalBrutoGlobalDescINSS * taxaIRPF2
-                    } else 
-                    if (SalBrutoGlobalDescINSS >= tetoIRPF3 && SalBrutoGlobalDescINSS < tetoIRPF4) {
-                        descontoIRPF = SalBrutoGlobalDescINSS * taxaIRPF3
-                    } else
-                    if (SalBrutoGlobalDescINSS >= tetoIRPF4) {
-                        descontoIRPF = SalBrutoGlobalDescINSS * taxaIRPF4
-                    } return descontoIRPF
-            }
+    
     //acionamento de eventos
         //botões
             btCalcular.addEventListener("click", calcular);
