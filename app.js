@@ -131,16 +131,17 @@
     }
         function folhaIndividual() {
             outFuncionario.classList.remove('displayVetorFuncionario');
+            outFuncionario.classList.remove('formatacaoText')
             outDisplayControlFolha.classList.add('formatacaoBotao');
             let FichaIndividual = '';
             for(let i = 0; i < Funcionarios.length; i++) {
                 FichaIndividual = `Ficha individual atual\n
                 Nome: ${Funcionarios[i].funcionario}\n
-                Salário: ${(Funcionarios[i].salario).toFixed(2)}\n
+                Salário: ${(Funcionarios[i].salario).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
                 Possui dependentes: ${Funcionarios[i].dependente}\n
-                Paga pensão: ${Funcionarios[i].valorPensao}\n
-                Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toFixed(2)}\n
-                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toFixed(2)}\n`;
+                Paga pensão: ${(Funcionarios[i].valorPensao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
+                Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
+                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n`;
                 
             }
             outFuncionario.innerText = FichaIndividual;
@@ -153,11 +154,11 @@
             for (let i = 0; i < Funcionarios.length; i++) {
                 ListaFuncionarios += `Ficha individual\n
                 Nome: ${Funcionarios[i].funcionario}\n
-                Salário: ${(Funcionarios[i].salario).toFixed(2)}\n
+                Salário: ${(Funcionarios[i].salario).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
                 Possui dependentes: ${Funcionarios[i].dependente}\n
-                Paga pensão: ${Funcionarios[i].valorPensao}\n
-                Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toFixed(2)}\n
-                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toFixed(2)}\n\n`;
+                Paga pensão: ${(Funcionarios[i].valorPensao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
+                Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
+                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n\n`;
             }
 
             //validação para o vetor
@@ -170,8 +171,10 @@
         }
 
 
-        //acionamento da folhaCompleta
+        //acionamento da folhaCompleta() que está dentro da resposta do calcular()
         btListar.addEventListener("click", folhaCompleta);
+
+
  } //FIM  DA FUNCAO CALCULAR
 
 
@@ -219,13 +222,18 @@
 
     
     function Limpar() {
-        inNome.value = '';
-        inSalBruto.value = '';
-        inDependente.value = '';
-        inPensao.value = ''; 
-        Funcionarios = '';
-        checkPensaoNao.checked = true;
-        checkDependenteNao.checked = true;
+        //limpando input
+            inNome.value = '';
+            inSalBruto.value = '';
+            inDependente.value = '';
+            inPensao.value = ''; 
+        //resetando check
+            checkPensaoNao.checked = true;
+            checkDependenteNao.checked = true;
+        //para => display: none
+            outFuncionario.classList.add('displayVetorFuncionario');
+            outFuncionarios.classList.add('displayVetorFuncionarios');
+            outDisplayControlFolha.classList.remove('formatacaoBotao');
     }
 
     function ResetePreenchimento() {
