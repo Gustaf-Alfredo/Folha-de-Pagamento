@@ -15,6 +15,7 @@
     //botões - bt
     const btCalcular = document.getElementById('btCalcular');
     const btLimpar = document.getElementById('btLimpar');
+    const btListar = document.getElementById('btListar');
 
     //resposta de validação - outValidacao
         //Nome
@@ -33,6 +34,7 @@
     const outFuncionario = document.getElementById('outFuncionario');
     const outFuncionarios = document.getElementById('outFuncionarios');
     const outDescontosIndividual = document.getElementById('outDescontosIndividual');
+    const outDisplayControlFolha = document.getElementById('outDisplayControlFolha');
 
     //criação de vetor global
     let Funcionarios = []
@@ -122,10 +124,12 @@
             checkNaoDependente()
             checkNaoPensao();          
             folhaIndividual();
-            inNome.focus();       
+            inNome.focus();   
+            ResetePreenchimento()  
     }
         function folhaIndividual() {
             outFuncionario.classList.remove('displayVetorFuncionario');
+            outDisplayControlFolha.classList.add('formatacaoBotao');
             let FichaIndividual = '';
             for(let i = 0; i < Funcionarios.length; i++) {
                 FichaIndividual = `Ficha individual\n
@@ -145,17 +149,27 @@
             outFuncionarios.classList.remove('displayVetorFuncionarios');
             let ListaFuncionarios = '';
             for (let i = 0; i < Funcionarios.length; i++) {
-                litsa += `Ficha individual\n
+                ListaFuncionarios += `Ficha individual\n
                 Nome: ${Funcionarios[i].funcionario}\n
                 Salário: ${(Funcionarios[i].salario).toFixed(2)}\n
                 Possui dependentes: ${Funcionarios[i].dependente}\n
                 Paga pensão: ${Funcionarios[i].valorPensao}\n
                 Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toFixed(2)}\n
-                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toFixed(2)}\n`;
+                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toFixed(2)}\n\n`;
             }
 
-            outFuncionarios.innerText = ListaFuncionarios;
+            //validação para o vetor
+            if(Funcionarios.length == 1) {
+                window.alert('Registre mais fichas para poder listar...')
+            } else {
+                outFuncionarios.innerText = ListaFuncionarios;
+            }
+            
         }
+
+
+        //acionamento da folhaCompleta
+        btListar.addEventListener("click", folhaCompleta);
  } //FIM  DA FUNCAO CALCULAR
 
 
@@ -203,6 +217,14 @@
 
     
     function Limpar() {
+        inNome.value = '';
+        inSalBruto.value = '';
+        inDependente.value = '';
+        inPensao.value = ''; 
+        Funcionarios = '';
+    }
+
+    function ResetePreenchimento() {
         inNome.value = '';
         inSalBruto.value = '';
         inDependente.value = '';

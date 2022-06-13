@@ -127,12 +127,30 @@ section .container .title.is-4 {
 }
 
 .column.is-9 .displayVetorFuncionarios {
-    display: none;
+   /*  display: none; */
 }
 
 .column.is-9 .displayVetorFuncionario {
-   /*  display: none; */
+    /*  display: none;  */
 }
+
+
+/* .column.is-9 .RespostasApp .control {
+   
+} */
+
+.column.is-9 .RespostasApp .controlDisplay {
+    display: none;
+    position: relative;
+    top: 35px;  
+    align-items: center;
+    justify-content: end;
+}
+
+.column.is-9 .RespostasApp .formatacaoBotao {
+    display: flex;
+}
+
 
 /* .column.is-9 .displayDescontosIndividuais {
     display: none;
