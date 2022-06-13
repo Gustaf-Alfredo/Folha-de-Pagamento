@@ -37,12 +37,21 @@
     let Funcionarios = []
 
 //iniciando programa
+
+ 
    function calcular () {
     //puxando valores
         let nome = inNome.value;
         let salBruto = Number(inSalBruto.value);
         let dependente = Number(inDependente.value);
         let pensao = Number(inPensao.value);
+
+
+        function teste() {
+            let testenome = nome
+            console.log(testenome)
+        }
+        
     //validação para nome
         if(nome == "") {
             inNome.style.border = '2px solid #FF2B56';
@@ -63,8 +72,10 @@
             checkNaoDependente()
             checkNaoPensao();          
             folhaIndividual();
-            inNome.focus();         
-            let INSSdescontoVariavel = INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22,0.075,0.09,0.12,0.14);//tetoINSS1 à tetoINSS4 e taxaINSS1 à taxaINSS4         
+            inNome.focus();
+            teste()         
+            let INSSdescontoVariavel = INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22,0.075,0.09,0.12,0.14);//tetoINSS1 à tetoINSS4 e taxaINSS1 à taxaINSS4      
+            /* let IRPFdescontoVariavel = IRPFdesconto(1903.98, 2826.66,3751.06,4664.68,0.075,0.15,0.225,0.275) */
             /*
             taxas do INSS
                 taxaINSS1 = 0.075
@@ -72,19 +83,27 @@
                 taxaINSS3 = 0.12
                 taxaINSS4 = 0.14 
             */
-            /* console.log(Funcionarios);  */  
-            return salBruto       
+            /* console.log(Funcionarios);  */       
+            
+            class App {
+                constructor(nome, salBruto, INSSdescontoVariavel) {
+                    this.nome = nome;
+                    this.salBruto = salBruto;
+                    this.INSSdescontoVariavel = INSSdescontoVariavel;
+                }
+            } 
+    
+            const pessoa1 = new App(nome, salBruto, INSSdescontoVariavel) 
+    
+            console.log(pessoa1)
         }
 
+        
+
+        return salBruto
     } //FIM da função Calcular
-   
-        /* outDescontosIndividual.classList.remove('displayDescontosIndividuais')
-                outDescontosIndividual.textContent = `Desconto INSS(R$): ${descontoINSS}` */
-        //valores de tetoINSS
 
-    //}
-
-
+    
      function folhaIndividual() {
         outFuncionario.classList.remove('displayVetorFuncionario');
         let FichaIndividual = '';
@@ -149,7 +168,7 @@
             function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4,taxaINSS1,taxaINSS2,taxaINSS3,taxaINSS4) {
                 let descontoINSS = Number();
                 let SalBrutoGlobal = inSalBruto.value;
-                console.log(SalBrutoGlobal)
+               /*  console.log(SalBrutoGlobal) */
                 
                 //validação
                     if (SalBrutoGlobal < tetoINSS1) {
@@ -173,9 +192,29 @@
             }
 
             //Cálculo IRPF
-            function IRPFdesconto() {
-                let INSSdescontoVariavel = INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22,0.075,0.09,0.12,0.14);//tetoINSS1 à tetoINSS4 e taxaINSS1 à taxaINSS4 
+            function IRPFdesconto(tetoIRPF1, tetoIRPF2, tetoIRPF3, tetoIRPF4, taxaIRPF1, taxaIRPF2, taxaIRPF3, taxaIRPF4) {
+                /* let descontoINSS */ 
+                let descontoIRPF = Number();
+                let SalBrutoGlobal = inSalBruto.value;
+                /* let SalBrutoGlobalDescINSS = SalBrutoGlobal - descontoINSS; */ //descontoINSS nao recebe valor
 
+
+                //validação
+                    if( SalBrutoGlobalDescINSS < tetoIRPF1) {
+                        descontoIRPF = 0
+                    } else 
+                    if ( SalBrutoGlobalDescINSS >= tetoIRPF1 &&  SalBrutoGlobalDescINSS < tetoIRPF2) {
+                        descontoIRPF = SalBrutoGlobalDescINSS * taxaIRPF1
+                    } else
+                    if (SalBrutoGlobalDescINSS >= tetoIRPF2 && SalBrutoGlobalDescINSS < tetoIRPF3) {
+                        descontoIRPF = SalBrutoGlobalDescINSS * taxaIRPF2
+                    } else 
+                    if (SalBrutoGlobalDescINSS >= tetoIRPF3 && SalBrutoGlobalDescINSS < tetoIRPF4) {
+                        descontoIRPF = SalBrutoGlobalDescINSS * taxaIRPF3
+                    } else
+                    if (SalBrutoGlobalDescINSS >= tetoIRPF4) {
+                        descontoIRPF = SalBrutoGlobalDescINSS * taxaIRPF4
+                    } return descontoIRPF
             }
     //acionamento de eventos
         //botões
