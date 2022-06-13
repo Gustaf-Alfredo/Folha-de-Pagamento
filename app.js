@@ -126,19 +126,21 @@
             folhaIndividual();
             inNome.focus();   
             ResetePreenchimento()  
+           
+            
     }
         function folhaIndividual() {
             outFuncionario.classList.remove('displayVetorFuncionario');
             outDisplayControlFolha.classList.add('formatacaoBotao');
             let FichaIndividual = '';
             for(let i = 0; i < Funcionarios.length; i++) {
-                FichaIndividual = `Ficha individual\n
+                FichaIndividual = `Ficha individual atual\n
                 Nome: ${Funcionarios[i].funcionario}\n
                 Salário: ${(Funcionarios[i].salario).toFixed(2)}\n
                 Possui dependentes: ${Funcionarios[i].dependente}\n
                 Paga pensão: ${Funcionarios[i].valorPensao}\n
                 Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toFixed(2)}\n
-                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toFixed(2)}`;
+                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toFixed(2)}\n`;
                 
             }
             outFuncionario.innerText = FichaIndividual;
@@ -222,6 +224,8 @@
         inDependente.value = '';
         inPensao.value = ''; 
         Funcionarios = '';
+        checkPensaoNao.checked = true;
+        checkDependenteNao.checked = true;
     }
 
     function ResetePreenchimento() {
@@ -229,6 +233,8 @@
         inSalBruto.value = '';
         inDependente.value = '';
         inPensao.value = ''; 
+        checkPensaoNao.checked = true;
+        checkDependenteNao.checked = true;
     }
     
     //acionamento de eventos

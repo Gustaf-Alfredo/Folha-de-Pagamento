@@ -151,6 +151,10 @@ section .container .title.is-4 {
     display: flex;
 }
 
+.column.is-9 .RespostasApp .FuncionarioBotao {
+    margin-bottom: 20px;
+}
+
 
 /* .column.is-9 .displayDescontosIndividuais {
     display: none;
