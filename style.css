@@ -131,7 +131,7 @@ section .container .title.is-4 {
 }
 
 .column.is-9 .displayVetorFuncionario {
-    display: none;
+   /*  display: none; */
 }
 
 /* .column.is-9 .displayDescontosIndividuais {

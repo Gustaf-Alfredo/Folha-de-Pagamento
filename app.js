@@ -31,6 +31,7 @@
 
     //resposta do programa - out
     const outFuncionario = document.getElementById('outFuncionario');
+    const outFuncionarios = document.getElementById('outFuncionarios');
     const outDescontosIndividual = document.getElementById('outDescontosIndividual');
 
     //criação de vetor global
@@ -127,7 +128,7 @@
             outFuncionario.classList.remove('displayVetorFuncionario');
             let FichaIndividual = '';
             for(let i = 0; i < Funcionarios.length; i++) {
-                lista = `Ficha individual\n
+                FichaIndividual = `Ficha individual\n
                 Nome: ${Funcionarios[i].funcionario}\n
                 Salário: ${(Funcionarios[i].salario).toFixed(2)}\n
                 Possui dependentes: ${Funcionarios[i].dependente}\n
@@ -136,9 +137,25 @@
                 Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toFixed(2)}`;
                 
             }
-            outFuncionario.innerText = lista;
+            outFuncionario.innerText = FichaIndividual;
                                        
         } 
+
+        function folhaCompleta() {
+            outFuncionarios.classList.remove('displayVetorFuncionarios');
+            let ListaFuncionarios = '';
+            for (let i = 0; i < Funcionarios.length; i++) {
+                litsa += `Ficha individual\n
+                Nome: ${Funcionarios[i].funcionario}\n
+                Salário: ${(Funcionarios[i].salario).toFixed(2)}\n
+                Possui dependentes: ${Funcionarios[i].dependente}\n
+                Paga pensão: ${Funcionarios[i].valorPensao}\n
+                Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toFixed(2)}\n
+                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toFixed(2)}\n`;
+            }
+
+            outFuncionarios.innerText = ListaFuncionarios;
+        }
  } //FIM  DA FUNCAO CALCULAR
 
 
