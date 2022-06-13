@@ -49,7 +49,7 @@
     let SalBrutoGlobalDescINSS = Number()
      //funções de cálculos
             //Cálculo INSS
-            function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4,taxaINSS1,taxaINSS2,taxaINSS3,taxaINSS4) {
+            function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4,/* */taxaINSS1,taxaINSS2,taxaINSS3,taxaINSS4) {
                 //validação
                     if (salBruto < tetoINSS1) {
                         descontoINSS = salBruto * taxaINSS1
@@ -71,9 +71,10 @@
             }
 
             //Cálculo IRPF
-            function IRPFdesconto(tetoIRPF1, tetoIRPF2, tetoIRPF3, tetoIRPF4, taxaIRPF1, taxaIRPF2, taxaIRPF3, taxaIRPF4,deducoesIRPF1,deducoesIRPF2,deducoesIRPF3,deducoesIRPF4) { 
+            function IRPFdesconto(tetoIRPF1, tetoIRPF2, tetoIRPF3, tetoIRPF4,/* */ taxaIRPF1, taxaIRPF2, taxaIRPF3, taxaIRPF4,/* */deducoesIRPF1,deducoesIRPF2,deducoesIRPF3,deducoesIRPF4,/* */descUnitarioDependente) { 
                 //validação
-                SalBrutoGlobalDescINSS = salBruto - descontoINSS;
+                SalBrutoGlobalDescINSS = (salBruto - descontoINSS) - (descUnitarioDependente * dependente) - pensao;
+                console.log(SalBrutoGlobalDescINSS)
                     if( SalBrutoGlobalDescINSS < tetoIRPF1) {
                         descontoIRPF = 0
                     } else 
@@ -95,8 +96,8 @@
             }
     let INSSdescontoVariavel = INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22,/**/0.075,0.09,0.12,0.14);
     //tetoINSS1 à tetoINSS4 //taxaINSS1 à taxaINSS4 //
-    let IRPFdescontoVariavel = IRPFdesconto(1903.98, 2826.66,3751.06,4664.68,/**/0.075,0.15,0.225,0.275,/**/142.8,354.8,636.13,869.36);
-    //tetoIRPF1 à tetoIRPF4 // taxaIRPF1 à taxaIRPF4 // deducoesIRPF1 à deducoesIRPF4 //
+    let IRPFdescontoVariavel = IRPFdesconto(1903.98, 2826.66,3751.06,4664.68,/**/0.075,0.15,0.225,0.275,/**/142.8,354.8,636.13,869.36,/* */189.59);
+    //tetoIRPF1 à tetoIRPF4 // taxaIRPF1 à taxaIRPF4 // deducoesIRPF1 à deducoesIRPF4 // desconto unitário de dependente
 
 
     //validação para nome
@@ -128,7 +129,7 @@
             for(let i = 0; i < Funcionarios.length; i++) {
                 lista = `Ficha individual\n
                 Nome: ${Funcionarios[i].funcionario}\n
-                Salário: ${Funcionarios[i].salario}\n
+                Salário: ${(Funcionarios[i].salario).toFixed(2)}\n
                 Possui dependentes: ${Funcionarios[i].dependente}\n
                 Paga pensão: ${Funcionarios[i].valorPensao}\n
                 Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toFixed(2)}\n
