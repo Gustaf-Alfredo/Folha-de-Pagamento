@@ -14,10 +14,10 @@ section .container .title.is-4 {
 /* CHECKBOX -------------------------------------*/
 
     /*para esconder input */
-    section .container .column.is-9 .checkDisplayDependente {
+    section .container .column.is-12 .checkDisplayDependente {
         display: none;
     } 
-    section .container .column.is-9 .checkDisplayPensao {
+    section .container .column.is-12 .checkDisplayPensao {
         display: none;
     } 
 
@@ -106,31 +106,31 @@ section .container .title.is-4 {
 
 
 /* para validações do Javascript  */
-.column.is-9 .field#nome {
+.column.is-12 .field#nome {
     
 }
 
-.column.is-9 .field#nome .ValidacaoNome {
+.column.is-12 .field#nome .ValidacaoNome {
     /* border-color: #E0E0E0; */
 }
 
-.column.is-9 .field#nome .ValidacaoHelp {
+.column.is-12 .field#nome .ValidacaoHelp {
     /* display: none; */
 }
 
-.column.is-9 .field#nome .ValidacaoNomeIcon {
+.column.is-12 .field#nome .ValidacaoNomeIcon {
     display: none; 
 }
 
-.column.is-9 .field#SalBruto .ValidacaoSalBrutoIcon {
+.column.is-12 .field#SalBruto .ValidacaoSalBrutoIcon {
     display: none; 
 }
 
-.column.is-9 .displayVetorFuncionarios {
+.column.is-12 .displayVetorFuncionarios {
      display: none; 
 }
 
-.column.is-9 .displayVetorFuncionario {
+.column.is-12 .displayVetorFuncionario {
       display: none;  
 }
 
@@ -139,7 +139,7 @@ section .container .title.is-4 {
    
 } */
 
-.column.is-9 .RespostasApp .controlDisplay {
+.column.is-12 .RespostasApp .controlDisplay {
     display: none;
     position: relative;
     top: 35px;  
@@ -147,11 +147,11 @@ section .container .title.is-4 {
     justify-content: end;
 }
 
-.column.is-9 .RespostasApp .formatacaoBotao {
+.column.is-12 .RespostasApp .formatacaoBotao {
     display: flex;
 }
 
-.column.is-9 .RespostasApp .FuncionarioBotao {
+.column.is-12 .RespostasApp .FuncionarioBotao {
     margin-bottom: 20px;
 }
 
@@ -160,7 +160,7 @@ section .container .title.is-4 {
     display: none;
 } */
 
-.column.is-9 .formatacaoText {
+.column.is-12 .formatacaoText {
     display: none;
 }
 
@@ -189,7 +189,7 @@ textarea:focus, input:focus, select:focus {
 /* RESPONSIVO -------------------*/
 
 @media(max-width: 465px) and (max-width:555px) {
-    .column.is-9 .flexboxCheck {
+    .column.is-12 .flexboxCheck {
         text-align: center;
         display: flex;
         flex-direction: column;
