@@ -112,7 +112,7 @@
     //validação para salário bruto
         if (salBruto <= 0  || salBruto == "" || isNaN(salBruto)) {
         inSalBruto.style.border = '2px solid #FF2B56';
-        outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500,50';
+        outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500.50';
         outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
         } else  {        
             //recebendo informação de checkmark
