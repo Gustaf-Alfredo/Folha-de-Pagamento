@@ -26,6 +26,7 @@ class Funcionario {
         if(this.salBruto > tetoINSS4) {
             descontoINSS = tetoINSS4 * taxaINSS4
         }
+        console.log(descontoINSS)
         return descontoINSS
     }
 
