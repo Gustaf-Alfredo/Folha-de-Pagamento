@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Folha da Pagamento</title>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+    />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="index.html">
+            <img
+              src="https://bulma.io/images/bulma-logo.png"
+              alt="Bulma: Free, open source, and modern CSS framework based on Flexbox"
+              width="112"
+              height="28"
+            />
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu is-active">
+          <!-- desativar is-active -->
+          <div class="navbar-start">
+            <a class="navbar-item" href="index.html"> Início </a>
+
+            <a class="navbar-item" href="referencias.html"> Cálculos </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-12">
+            
+            <div class="field" id="nome">
+              <label class="label">Nome</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text" placeholder="Text input" value="" name="inNome">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+                <span class="icon is-small is-right ValidacaoNomeIcon" id="outValidacaoNomeIcon">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </div>
+              <p class="help is-danger ValidacaoNomeHelp" id="outValidacaoNomeHelp"></p>
+            </div>
+            
+
+            
+            <div class="field" id="SalBruto">
+              <label class="label">Salário Bruto</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text" placeholder="Text input" value="" name="inSalBruto">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-city"></i>
+                </span>
+                <span class="icon is-small is-right ValidacaoSalBrutoIcon" id="outValidacaoSalBrutoIcon">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </div>
+              <p class="help is-danger ValidacaoSalBrutoHelp" id="outValidacaoSalBrutoHelp"></p>
+            </div>
+
+            <!-- Mesma div os dois checkbox -->
+            <div class="flexboxCheck">
+                <div class="checkbox1">
+                  <!-- DEPENDENTES -->
+                  <div class="field">
+                    <label class="label"> Possui dependentes? </label>
+                    <label class="radio check">
+                     <!--  SIM -->
+                      <input
+                        type="checkbox"
+                        name="checkDependente"/>
+                      <span class="checkmark"></span>
+                      Sim
+                    </label>
+                   <!--  NÃO -->
+
+                   <!--OBS: colocando o checked="checked vai ficar marcado padrão"-->
+                    <label class="radio check">
+                      <input
+                        type="checkbox"
+                        
+                        id="checkDependenteNao"
+                        onclick=""
+                      />
+                      <span class="checkmark"></span>
+                      Não
+                    </label>
+                  </div>
+                  <!-- INPUT DE RESPOSTA -->
+                  <div class="field checkDisplayDependente" id="DependenteDisplay">
+                    <div class="control has-icons-left">
+                      <input
+                        class="input"
+                        type="number"
+                        placeholder="Dependent input"
+                        value=""
+                        id="inDependente"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-home"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="checkbox2">
+                  <!-- PENSÃO ALIMENTÍCIA -->
+                  <div class="field">
+                    <label class="label"> Paga pensão alimentícia? </label>
+                    <!-- SIM -->
+                    <label class="radio check">
+                      <input
+                        type="checkbox"
+                       
+                        id="checkPensaoSim"
+                        onclick=""
+                        name="checkPensao"
+                      />
+                      <span class="checkmark"></span>
+                      Sim
+                    </label>
+                    <!-- NÃO -->
+
+                     <!--OBS: colocando o checked="checked vai ficar marcado padrão"-->
+                    <label class="radio check">
+                      <input
+                        type="checkbox"
+                        
+                        id="checkPensaoNao"
+                        onclick=""
+                      />
+                      <span class="checkmark"></span>
+                      Não
+                    </label>
+                  </div>
+                   <!-- INPUT DE RESPOSTA -->
+                  <div class="field checkDisplayPensao" id="PensaoDisplay">
+                    <div class="control has-icons-left">
+                      <input
+                        class="input"
+                        type="number"
+                        placeholder="Pension input"
+                        value=""
+                        id="inPensao"
+                      />
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-home"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <div class="field is-grouped botoes">
+              <div class="control">
+                <button type="button" class="button is-primary" onclick="app.RegistrarFuncionarios()">
+                  Calcular
+                </button>
+              </div>
+              <div class="control">
+                <button class="button is-danger is-light" id="btLimpar">
+                  Limpar
+                </button>
+              </div>
+            </div>
+
+            <div class="RespostasApp" id="">
+              <div class="FuncionarioBotao" id="">
+                <div class="control controlDisplay" id="outDisplayControlFolha">
+                  <button class="button is-primary" id="btListar">
+                    Listar
+                  </button>
+                </div>
+
+                <pre class="displayVetorFuncionario formatacaoText" id="outFuncionario">
+                
+                </pre>
+              </div>
+              
+              <pre class="displayDescontosIndividuais formatacaoText" id="outDescontosIndividual"></pre>
+              <pre class="displayVetorFuncionarios" id="outFuncionarios"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/funcionario.js"></script>
+    <script src="assets/js/index.js"></script>
+  </body>
+</html>
