@@ -1,45 +1,62 @@
 class App {
-    //método para registrar funcionários
+//método para registrar funcionários
     RegistrarFuncionarios() {
-        //referências
+    //referências
         let nome = document.querySelector("input[name='inNome']").value
         let inSalBruto = document.querySelector("input[name='inSalBruto']").value
         this.salBruto = inSalBruto
         this.dependente = document.querySelector("input[name='checkDependente']").checked
         this.pensao = document.querySelector("input[name='checkPensao']").checked
         
-        //check
+    //check
         if(this.dependente) {
             this.inDependenteQuantity = document.querySelector("input[name='inDependente']").value 
+            this.outDependente = this.inDependenteQuantity
         } else {
-            this.dependente = 'Não possui dependentes'
+            this.outDependente = 'Não possui dependentes'
             this.inDependenteQuantity = 0
         }
         if(this.pensao) {
             this.inPensaoQuantity = document.querySelector("input[name='inPensao']").value
+            this.outPensao = Number(this.inPensaoQuantity).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
         }  else {
+            this.outPensao = 'Não paga pensão alimentícia'
             this.inPensaoQuantity = 0
         }
         
-        
-        //argumentos - INSSdesconto/IRPFdesconto
+    
+    //argumentos - INSSdesconto/IRPFdesconto
         this.INSSdescontoVariavel = this.INSSdesconto(this.descontoINSS,1212.01,2427.35,3641.03,7087.22,/**/0.075,0.09,0.12,0.14)
         this.IRPFdescontoVariavel = this.IRPFdesconto(this.descontoIRPF,1903.98,2826.66,3751.06,4664.68/**/,0.075,0.15,0.225,0.275,/**/142.8,354.8,636.13,869.36)
 
+    //cálculo para ter sálario líquido
         this.salLiquido = inSalBruto - this.INSSdescontoVariavel - this.IRPFdescontoVariavel
+
+    //instanciando a classe Funcionario
         let funcionario = new Funcionario(nome,inSalBruto,this.dependente,this.inDependenteQuantity,this.pensao,this.inPensaoQuantity,this.salLiquido)
 
-        let outSalBruto = (this.salBruto).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
-        let RespostaApp = document.querySelector("pre[name='RespostaApp']")
-        RespostaApp.innerText = 'Nome: ' + nome + '\n'+
-                                'Salário Bruto: ' + outSalBruto + '\n' +
-                                'Dependentes: ' + this.dependente + '\n' +
-                                'Pensão alimentícia: ' + this.pensao + '\n' +
-                                'Base de cálculo: ' + this.baseCalculo + '\n' +
+    //Resposta do programa
+        //referência para resposta
+            let RespostaApp = document.querySelector("pre[name='RespostaApp']")
+        //conversão para número e depois para string
+        //para adptar o valor ao modelo: R$ 0,00
+            let outSalBruto = Number(this.salBruto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            let outBaseCalculo = Number(this.baseCalculo).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+            let outPensao = Number(this.inPensaoQuantity).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+            let outINSSdescontoVariavel = Number(this.INSSdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+            let outIRPFdescontoVariavel = Number(this.IRPFdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+            let outSalarioLiquido = Number(this.salBruto - this.INSSdescontoVariavel - this.IRPFdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
 
-                                '\n' + 'Descontos: ' + '\n' +
-                                        'INSS: ' + this.INSSdescontoVariavel + '\n' +
-                                        'IRPF: ' + this.IRPFdescontoVariavel + '\n'
+        //Resposta do programa
+            RespostaApp.innerText = 'Nome: ' + nome + '\n'+
+                                    'Salário Bruto: ' + outSalBruto + '\n' +
+                                    'Dependentes: ' + this.outDependente + '\n' +
+                                    'Pensão alimentícia: ' + this.outPensao + '\n' +
+                                    'Base de cálculo: ' + outBaseCalculo + '\n' +
+                                    '\n' + 'Descontos: ' + '\n' +
+                                            'INSS: ' + outINSSdescontoVariavel + '\n' +
+                                            'IRPF: ' + outIRPFdescontoVariavel + '\n' +
+                                    'Salário Líquido: ' + outSalarioLiquido + '\n'
     }
 
     //método responsável pelo cálculo INSS
@@ -49,7 +66,6 @@ class App {
 
         if(this.salBruto <= tetoINSS1) {
             descontoINSS = this.salBruto * taxaINSS1
-            console.log(this.salBruto)
         } else 
         if (this.salBruto > tetoINSS1 && this.salBruto <= tetoINSS2) {
             descontoINSS = this.salBruto * taxaINSS2
@@ -63,7 +79,6 @@ class App {
         if(this.salBruto > tetoINSS4) {
             descontoINSS = tetoINSS4 * taxaINSS4
         }
-        console.log(descontoINSS)
         return descontoINSS
     }
 
@@ -92,6 +107,7 @@ class App {
         
     }
 
+//métodos para uso do checkbox - DisplayExibir/DisplayOcultar
 
     DisplayExibir() {
         this.dependente = document.querySelector("input[name='checkDependente']").checked
