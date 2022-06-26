@@ -14,6 +14,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="assets/css/style.css">
   </head>
 
   <body>
@@ -86,7 +87,8 @@
                      <!--  SIM -->
                       <input
                         type="checkbox"
-                        name="checkDependente"/>
+                        name="checkDependente"
+                        onclick="app.DisplayExibir()"/>
                       <span class="checkmark"></span>
                       Sim
                     </label>
@@ -96,16 +98,16 @@
                     <label class="radio check">
                       <input
                         type="checkbox"
-                        
-                        id="checkDependenteNao"
-                        onclick=""
+                        checked="checked"
+                        name="checkNotDependente"
+                        onclick="app.DisplayOcultar()"
                       />
                       <span class="checkmark"></span>
                       Não
                     </label>
                   </div>
                   <!-- INPUT DE RESPOSTA -->
-                  <div class="field checkDisplayDependente" id="DependenteDisplay">
+                  <div class="field checkDisplayDependente" id="DependenteDisplay" name="DependenteDisplay">
                     <div class="control has-icons-left">
                       <input
                         class="input"
@@ -113,6 +115,7 @@
                         placeholder="Dependent input"
                         value=""
                         id="inDependente"
+                        name="inDependente"
                       />
                       <span class="icon is-small is-left">
                         <i class="fas fa-home"></i>
@@ -129,9 +132,7 @@
                     <label class="radio check">
                       <input
                         type="checkbox"
-                       
-                        id="checkPensaoSim"
-                        onclick=""
+                        onclick="app.DisplayExibir()"
                         name="checkPensao"
                       />
                       <span class="checkmark"></span>
@@ -143,16 +144,16 @@
                     <label class="radio check">
                       <input
                         type="checkbox"
-                        
-                        id="checkPensaoNao"
-                        onclick=""
+                        checked="checked"
+                        onclick="app.DisplayOcultar()"
+                        name="checkNotPensao"
                       />
                       <span class="checkmark"></span>
                       Não
                     </label>
                   </div>
                    <!-- INPUT DE RESPOSTA -->
-                  <div class="field checkDisplayPensao" id="PensaoDisplay">
+                  <div class="field checkDisplayPensao" id="PensaoDisplay" name="PensaoDisplay">
                     <div class="control has-icons-left">
                       <input
                         class="input"
@@ -160,6 +161,7 @@
                         placeholder="Pension input"
                         value=""
                         id="inPensao"
+                        name="inPensao"
                       />
                       <span class="icon is-small is-left">
                         <i class="fas fa-home"></i>
@@ -182,21 +184,11 @@
               </div>
             </div>
 
-            <div class="RespostasApp" id="">
-              <div class="FuncionarioBotao" id="">
-                <div class="control controlDisplay" id="outDisplayControlFolha">
-                  <button class="button is-primary" id="btListar">
-                    Listar
-                  </button>
-                </div>
-
-                <pre class="displayVetorFuncionario formatacaoText" id="outFuncionario">
-                
-                </pre>
-              </div>
-              
-              <pre class="displayDescontosIndividuais formatacaoText" id="outDescontosIndividual"></pre>
-              <pre class="displayVetorFuncionarios" id="outFuncionarios"></pre>
+            <div class="RespostasApp" name="">
+              <pre 
+                class=""
+                name="RespostaApp">
+              </pre>
             </div>
           </div>
         </div>

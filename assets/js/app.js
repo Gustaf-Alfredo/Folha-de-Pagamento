@@ -4,22 +4,42 @@ class App {
         //referências
         let nome = document.querySelector("input[name='inNome']").value
         let inSalBruto = document.querySelector("input[name='inSalBruto']").value
-        let pensao = document.querySelector("input[name='checkPensao']").checked
-        let dependente = document.querySelector("input[name='checkDependente']").checked
-        let funcionario = new Funcionario(nome,inSalBruto,dependente,pensao)
-        console.log(funcionario)
         this.salBruto = inSalBruto
+        this.dependente = document.querySelector("input[name='checkDependente']").checked
+        this.pensao = document.querySelector("input[name='checkPensao']").checked
+        
         //check
-        if(dependente) {
-            window.alert('check - dependente')
+        if(this.dependente) {
+            this.inDependenteQuantity = document.querySelector("input[name='inDependente']").value 
+        } else {
+            this.dependente = 'Não possui dependentes'
+            this.inDependenteQuantity = 0
         }
-        if(pensao) {
-            window.alert('check - pensao')
-        }  
+        if(this.pensao) {
+            this.inPensaoQuantity = document.querySelector("input[name='inPensao']").value
+        }  else {
+            this.inPensaoQuantity = 0
+        }
+        
         
         //argumentos - INSSdesconto/IRPFdesconto
         this.INSSdescontoVariavel = this.INSSdesconto(this.descontoINSS,1212.01,2427.35,3641.03,7087.22,/**/0.075,0.09,0.12,0.14)
         this.IRPFdescontoVariavel = this.IRPFdesconto(this.descontoIRPF,1903.98,2826.66,3751.06,4664.68/**/,0.075,0.15,0.225,0.275,/**/142.8,354.8,636.13,869.36)
+
+        this.salLiquido = inSalBruto - this.INSSdescontoVariavel - this.IRPFdescontoVariavel
+        let funcionario = new Funcionario(nome,inSalBruto,this.dependente,this.inDependenteQuantity,this.pensao,this.inPensaoQuantity,this.salLiquido)
+
+        let outSalBruto = (this.salBruto).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+        let RespostaApp = document.querySelector("pre[name='RespostaApp']")
+        RespostaApp.innerText = 'Nome: ' + nome + '\n'+
+                                'Salário Bruto: ' + outSalBruto + '\n' +
+                                'Dependentes: ' + this.dependente + '\n' +
+                                'Pensão alimentícia: ' + this.pensao + '\n' +
+                                'Base de cálculo: ' + this.baseCalculo + '\n' +
+
+                                '\n' + 'Descontos: ' + '\n' +
+                                        'INSS: ' + this.INSSdescontoVariavel + '\n' +
+                                        'IRPF: ' + this.IRPFdescontoVariavel + '\n'
     }
 
     //método responsável pelo cálculo INSS
@@ -50,7 +70,7 @@ class App {
     //método responsável pelo cálculo IRPF
     IRPFdesconto(descontoIRPF,/**/tetoIRPF1,tetoIRPF2,tetoIRPF3,tetoIRPF4,/**/taxaIRPF1,taxaIRPF2,taxaIRPF3,taxaIRPF4,/**/deducoesIRPF1,deducoesIRPF2,deducoesIRPF3,deducoesIRPF4) {
 
-        this.baseCalculo = (this.salBruto) - (this.INSSdescontoVariavel)
+        this.baseCalculo = (this.salBruto - this.INSSdescontoVariavel) - this.inPensaoQuantity - (this.inDependenteQuantity * 189.59)
         this.descontoIRPF = descontoIRPF
 
         if(this.baseCalculo <= tetoIRPF1) {
@@ -70,6 +90,37 @@ class App {
         }
         return descontoIRPF
         
+    }
+
+
+    DisplayExibir() {
+        this.dependente = document.querySelector("input[name='checkDependente']").checked
+        this.pensao = document.querySelector("input[name='checkPensao']").checked
+        if(this.dependente) {
+            document.querySelector("input[name='checkNotDependente']").checked = false
+            let displayDependente = document.querySelector("div[name='DependenteDisplay']")
+            displayDependente.classList.remove("checkDisplayDependente")           
+        }
+        if(this.pensao) {
+            document.querySelector("input[name='checkNotPensao']").checked = false
+            let displayPensao = document.querySelector("div[name='PensaoDisplay']")
+            displayPensao.classList.remove("checkDisplayPensao")
+        }  
+    }
+
+    DisplayOcultar() {
+        this.dependenteNot= document.querySelector("input[name='checkNotDependente']").checked
+        this.pensaoNot = document.querySelector("input[name='checkNotPensao']").checked
+        if(this.dependenteNot) {
+            document.querySelector("input[name='checkDependente']").checked = false
+            let displayDependente = document.querySelector("div[name='DependenteDisplay']")
+            displayDependente.classList.add("checkDisplayDependente")
+        }
+        if(this.pensaoNot) {
+            document.querySelector("input[name='checkPensao']").checked = false
+            let displayPensao = document.querySelector("div[name='PensaoDisplay']")
+            displayPensao.classList.add("checkDisplayPensao")
+        }
     }
 }
 

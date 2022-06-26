@@ -14,10 +14,10 @@ section .container .title.is-4 {
 /* CHECKBOX -------------------------------------*/
 
     /*para esconder input */
-    section .container .column.is-9 .checkDisplayDependente {
+    section .container .column.is-12 .checkDisplayDependente {
         display: none;
     } 
-    section .container .column.is-9 .checkDisplayPensao {
+    section .container .column.is-12 .checkDisplayPensao {
         display: none;
     } 
 
@@ -43,7 +43,7 @@ section .container .title.is-4 {
 
     /*para conseguir por o label*/
     .check {
-        display: block;
+        display: inline-block;
         position: relative;
         padding-left: 35px;
         margin-bottom: 12px;
@@ -105,22 +105,7 @@ section .container .title.is-4 {
 /*----------------------------------------------------------------------------------------*/
 
 
-/* para validações do Javascript  */
-.column.is-9 .field#nome {
-    
-}
 
-.column.is-9 .field#nome .ValidacaoNome {
-    /* border-color: #E0E0E0; */
-}
-
-.column.is-9 .field#nome .ValidacaoHelp {
-    /* display: none; */
-}
-
-.column.is-9 .field#nome .ValidacaoNomeIcon {
-    display: none; 
-}
 
 .column.is-9 .field#SalBruto .ValidacaoSalBrutoIcon {
     display: none; 
@@ -153,9 +138,4 @@ textarea:focus, input:focus, select:focus {
     outline: 0;
 } 
 
-/* .column.is-9 .field#nome .ValidacaoBorda {
-    background-color: #fff;
-    border-color: #dbdbdb;
-    border-radius: 4px;
-    color: #363636;
-} */
+
