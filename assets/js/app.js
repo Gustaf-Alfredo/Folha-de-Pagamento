@@ -153,7 +153,6 @@ class App {
                     let outINSSdescontoVariavel = Number(this.INSSdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
                     let outIRPFdescontoVariavel = Number(this.IRPFdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
                     let outSalarioLiquido = Number(this.salBruto - this.INSSdescontoVariavel - this.IRPFdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
-        
                 //Resposta do programa
                     RespostaApp.innerText = 'Nome: ' + nome + '\n'+
                                             'Salário Bruto: ' + outSalBruto + '\n' +
@@ -182,6 +181,10 @@ class App {
         displayPensao.classList.add("checkDisplayPensao")
         let displayDependente = document.querySelector("div[name='DependenteDisplay']")
         displayDependente.classList.add("checkDisplayDependente")
+    }
+
+    CreateElement() {
+        let RespostaCreate = document.createElement("pre")
     }
 }
 
