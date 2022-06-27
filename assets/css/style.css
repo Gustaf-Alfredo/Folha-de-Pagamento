@@ -102,40 +102,22 @@ section .container .title.is-4 {
         display: block;
     }
 
-/*----------------------------------------------------------------------------------------*/
-
-
-
-
-.column.is-9 .field#SalBruto .ValidacaoSalBrutoIcon {
-    display: none; 
-}
-
-.column.is-9 .displayVetorFuncionarios {
-    display: none;
-}
-
-.column.is-9 .displayVetorFuncionario {
-    display: none;
-}
-
-/* .column.is-9 .displayDescontosIndividuais {
-    display: none;
-} */
-
-.column.is-9 .formatacaoText {
-}
-
-
-
-
-
-
-/* resete css para input */
-textarea:focus, input:focus, select:focus {
+    /* resete css para input */
+    textarea:focus, input:focus, select:focus {
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
 } 
+/*----------------------------------------------------------------------------------------*/
+
+.column.is-12 .field#nomeField .ValidacaoNomeIcon {
+    display: none;
+}
+.column.is-12 .field#SalBrutoField .ValidacaoSalBrutoIcon {
+    display: none; 
+
+}
+
+
 
 

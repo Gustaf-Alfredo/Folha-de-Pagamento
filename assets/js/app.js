@@ -1,30 +1,57 @@
 class App {
+//método para validação
+    Validar() {
+        let inNome = document.querySelector("input[name='inNome']").value
+        let outValidacaoNomeIcon = document.querySelector("span[name='outValidacaoNomeIcon']")
+        let outValidacaoNomeHelp = document.querySelector("p[name='outValidacaoNomeHelp']")
+
+        let inSalBruto = document.querySelector("input[name='inSalBruto']").value
+        let outValidacaoSalBrutoHelp = document.querySelector("p[name='outValidacaoSalBrutoHelp']")
+        let outValidacaoSalBrutoIcon = document.querySelector("span[name='outValidacaoSalBrutoIcon']")
+    //validações
+    if(inNome == '') {
+        let inNome = document.querySelector("input[name='inNome']")
+        inNome.style.border = '2px solid #FF2B56'
+        outValidacaoNomeHelp.textContent = 'Por favor, preencha corretamente o formulário...'            
+        outValidacaoNomeIcon.classList.remove("ValidacaoNomeIcon")
+    } 
+    if(inSalBruto == '' || isNaN(inSalBruto) || inSalBruto <= 0) {
+        let inSalBruto = document.querySelector("input[name='inSalBruto']")
+        inSalBruto.style.border = '2px solid #FF2B56'
+        outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500.50'
+        outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
+    } else {
+
+    }
+
+     //check
+    if(this.dependente) {
+        this.inDependenteQuantity = document.querySelector("input[name='inDependente']").value 
+        this.outDependente = this.inDependenteQuantity
+    } else {
+        this.outDependente = 'Não possui dependentes'
+        this.inDependenteQuantity = 0
+    }
+    if(this.pensao) {
+        this.inPensaoQuantity = document.querySelector("input[name='inPensao']").value
+        this.outPensao = Number(this.inPensaoQuantity).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+    }  else {
+        this.outPensao = 'Não paga pensão alimentícia'
+        this.inPensaoQuantity = 0
+    }
+    
+
+}
 //método para registrar funcionários
     RegistrarFuncionarios() {
     //referências
         let nome = document.querySelector("input[name='inNome']").value
+        this.nome = nome
         let inSalBruto = document.querySelector("input[name='inSalBruto']").value
         this.salBruto = inSalBruto
         this.dependente = document.querySelector("input[name='checkDependente']").checked
         this.pensao = document.querySelector("input[name='checkPensao']").checked
-        
-    //check
-        if(this.dependente) {
-            this.inDependenteQuantity = document.querySelector("input[name='inDependente']").value 
-            this.outDependente = this.inDependenteQuantity
-        } else {
-            this.outDependente = 'Não possui dependentes'
-            this.inDependenteQuantity = 0
-        }
-        if(this.pensao) {
-            this.inPensaoQuantity = document.querySelector("input[name='inPensao']").value
-            this.outPensao = Number(this.inPensaoQuantity).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
-        }  else {
-            this.outPensao = 'Não paga pensão alimentícia'
-            this.inPensaoQuantity = 0
-        }
-        
-    
+        this.Validar()
     //argumentos - INSSdesconto/IRPFdesconto
         this.INSSdescontoVariavel = this.INSSdesconto(this.descontoINSS,1212.01,2427.35,3641.03,7087.22,/**/0.075,0.09,0.12,0.14)
         this.IRPFdescontoVariavel = this.IRPFdesconto(this.descontoIRPF,1903.98,2826.66,3751.06,4664.68/**/,0.075,0.15,0.225,0.275,/**/142.8,354.8,636.13,869.36)
@@ -57,6 +84,10 @@ class App {
                                             'INSS: ' + outINSSdescontoVariavel + '\n' +
                                             'IRPF: ' + outIRPFdescontoVariavel + '\n' +
                                     'Salário Líquido: ' + outSalarioLiquido + '\n'
+    }
+
+    Imprimir() {
+
     }
 
     //método responsável pelo cálculo INSS
