@@ -168,6 +168,7 @@ class App {
                                             'Salário Líquido: ' + outSalarioLiquido + '\n'
 
                 let listElement = document.createElement("pre")
+                listElement.style.margin = '0px 0px 30px 0px'
                 listElement.innerHTML += outRespostaApp
                 let buttonToRemove = this.createRemoveButton()
                 listElement.appendChild(buttonToRemove)
@@ -176,6 +177,7 @@ class App {
 
     createRemoveButton() {
         let buttonToRemove = document.createElement("button")
+        buttonToRemove.style.margin = '30px 0px 0px 0px'
         buttonToRemove.setAttribute("onclick", "app.remove()")
         buttonToRemove.innerText = "Remover"
         return buttonToRemove
