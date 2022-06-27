@@ -11,22 +11,25 @@ class App {
             let inSalBruto = document.querySelector("input[name='inSalBruto']").value
             let outValidacaoSalBrutoHelp = document.querySelector("p[name='outValidacaoSalBrutoHelp']")
             let outValidacaoSalBrutoIcon = document.querySelector("span[name='outValidacaoSalBrutoIcon']")
-//validações
-    if(inNome == '') {
-        let inNome = document.querySelector("input[name='inNome']")
-        inNome.style.border = '2px solid #FF2B56'
-        outValidacaoNomeHelp.textContent = 'Por favor, preencha corretamente o formulário...'            
-        outValidacaoNomeIcon.classList.remove("ValidacaoNomeIcon")
-    } 
-    if(inSalBruto == '' || isNaN(inSalBruto) || inSalBruto <= 0) {
-        let inSalBruto = document.querySelector("input[name='inSalBruto']")
-        inSalBruto.style.border = '2px solid #FF2B56'
-        outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500.50'
-        outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
-    } else {
-        this.Imprimir()
-    }
+    //validações
+        if(inNome == '') {
+            let inNome = document.querySelector("input[name='inNome']")
+            inNome.style.border = '2px solid #FF2B56'
+            outValidacaoNomeHelp.textContent = 'Por favor, preencha corretamente o formulário...'            
+            outValidacaoNomeIcon.classList.remove("ValidacaoNomeIcon")
+        } 
+        if(inSalBruto == '' || isNaN(inSalBruto) || inSalBruto <= 0) {
+            let inSalBruto = document.querySelector("input[name='inSalBruto']")
+            inSalBruto.style.border = '2px solid #FF2B56'
+            outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500.50'
+            outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
+        } else {
+            this.Imprimir()
+        }
 }
+
+//   -------------------------------------------CALCULOS--------------------------------------//
+
     //método responsável pelo cálculo INSS
     INSSdesconto(descontoINSS,/**/tetoINSS1,tetoINSS2,tetoINSS3,tetoINSS4,/**/taxaINSS1,taxaINSS2,taxaINSS3,taxaINSS4) {
         
@@ -74,6 +77,8 @@ class App {
         return descontoIRPF
         
     }
+// -----------------------------------------------------------------------------------------------------------//
+
 
 //métodos para uso do checkbox - DisplayExibir/DisplayOcultar
 
@@ -106,7 +111,7 @@ class App {
             displayPensao.classList.add("checkDisplayPensao")
         }
     }
-
+//Método para imprimir o resultado
     Imprimir() {
             //referências
                 let nome = document.querySelector("input[name='inNome']").value
@@ -174,7 +179,7 @@ class App {
                 listElement.appendChild(buttonToRemove)
                 document.getElementById("outRespostaApp").appendChild(listElement)
     }
-
+//criar botao para remover a resposta de um elemento do programa
     createRemoveButton() {
         let buttonToRemove = document.createElement("button")
         buttonToRemove.style.margin = '30px 0px 0px 0px'
@@ -182,12 +187,12 @@ class App {
         buttonToRemove.innerText = "Remover"
         return buttonToRemove
     }
-
+//método para o botao de remover
     remove() {
         let liToRemove = event.target.parentNode
         document.getElementById("outRespostaApp").removeChild(liToRemove)
     }
-
+//método para o botão limpar
     Reset() {
         //Nome
             let inNome = (document.querySelector("input[name='inNome']").value) = ''

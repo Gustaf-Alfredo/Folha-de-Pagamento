@@ -119,5 +119,28 @@ section .container .title.is-4 {
 }
 
 
+/*Responsivo*/
+
+/* RESPONSIVO -------------------*/
+
+@media(max-width: 465px) and (max-width:555px) {
+    .column.is-12 .flexboxCheck {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .flexboxCheck .checkbox1, .flexboxCheck .checkbox2 {
+        padding-right: 0;
+    }
+
+    section .container .botoes {
+        margin-right: 0;
+    }
+
+}
+
+
 
 
