@@ -144,7 +144,9 @@ class App {
         
             //Resposta do programa
                 //referência para resposta
-                    let RespostaApp = document.querySelector("p[name='RespostaApp']")
+
+                   // let RespostaApp = document.querySelector("div[name='RespostaApp']")
+                
                 //conversão para número e depois para string
                 //para adptar o valor ao modelo: R$ 0,00
                     let outSalBruto = Number(this.salBruto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
@@ -154,7 +156,8 @@ class App {
                     let outIRPFdescontoVariavel = Number(this.IRPFdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
                     let outSalarioLiquido = Number(this.salBruto - this.INSSdescontoVariavel - this.IRPFdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
                 //Resposta do programa
-                    RespostaApp.innerText = 'Nome: ' + nome + '\n'+
+
+                let outRespostaApp = 'Nome: ' + nome + '\n'+
                                             'Salário Bruto: ' + outSalBruto + '\n' +
                                             'Dependentes: ' + this.outDependente + '\n' +
                                             'Pensão alimentícia: ' + this.outPensao + '\n' +
@@ -163,28 +166,42 @@ class App {
                                                     'INSS: ' + outINSSdescontoVariavel + '\n' +
                                                     'IRPF: ' + outIRPFdescontoVariavel + '\n' +
                                             'Salário Líquido: ' + outSalarioLiquido + '\n'
+
+                let listElement = document.createElement("pre")
+                listElement.innerHTML += outRespostaApp
+                let buttonToRemove = this.createRemoveButton()
+                listElement.appendChild(buttonToRemove)
+                document.getElementById("outRespostaApp").appendChild(listElement)
+    }
+
+    createRemoveButton() {
+        let buttonToRemove = document.createElement("button")
+        buttonToRemove.setAttribute("onclick", "app.remove()")
+        buttonToRemove.innerText = "Remover"
+        return buttonToRemove
+    }
+
+    remove() {
+        let liToRemove = event.target.parentNode
+        document.getElementById("outRespostaApp").removeChild(liToRemove)
     }
 
     Reset() {
-    //Nome
-        let inNome = (document.querySelector("input[name='inNome']").value) = ''
-        let inSalBruto = document.querySelector("input[name='inSalBruto']").value = ''
-        let inDependenteQuantity = document.querySelector("input[name='inDependente']").value = ''
-        let inPensaoQuantity = document.querySelector("input[name='inPensao']").value = ''
-
-        this.dependente = document.querySelector("input[name='checkDependente']").checked = false
-        this.pensao = document.querySelector("input[name='checkPensao']").checked = false
-        this.dependente = document.querySelector("input[name='checkNotDependente']").checked = true
-        this.pensao = document.querySelector("input[name='checkNotPensao']").checked = true
-
-        let displayPensao = document.querySelector("div[name='PensaoDisplay']")
-        displayPensao.classList.add("checkDisplayPensao")
-        let displayDependente = document.querySelector("div[name='DependenteDisplay']")
-        displayDependente.classList.add("checkDisplayDependente")
-    }
-
-    CreateElement() {
-        let RespostaCreate = document.createElement("pre")
-    }
+        //Nome
+            let inNome = (document.querySelector("input[name='inNome']").value) = ''
+            let inSalBruto = document.querySelector("input[name='inSalBruto']").value = ''
+            let inDependenteQuantity = document.querySelector("input[name='inDependente']").value = ''
+            let inPensaoQuantity = document.querySelector("input[name='inPensao']").value = ''
+    
+            this.dependente = document.querySelector("input[name='checkDependente']").checked = false
+            this.pensao = document.querySelector("input[name='checkPensao']").checked = false
+            this.dependente = document.querySelector("input[name='checkNotDependente']").checked = true
+            this.pensao = document.querySelector("input[name='checkNotPensao']").checked = true
+    
+            let displayPensao = document.querySelector("div[name='PensaoDisplay']")
+            displayPensao.classList.add("checkDisplayPensao")
+            let displayDependente = document.querySelector("div[name='DependenteDisplay']")
+            displayDependente.classList.add("checkDisplayDependente")
+        }
 }
 
