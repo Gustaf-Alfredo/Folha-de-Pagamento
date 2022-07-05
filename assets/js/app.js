@@ -148,11 +148,7 @@ class App {
                 let funcionario = new Funcionario(nome,inSalBruto,this.dependente,this.inDependenteQuantity,this.pensao,this.inPensaoQuantity,this.salLiquido)
         
             //Resposta do programa
-                //referência para resposta
 
-                   // let RespostaApp = document.querySelector("div[name='RespostaApp']")
-                
-                //conversão para número e depois para string
                 //para adptar o valor ao modelo: R$ 0,00
                     let outSalBruto = Number(this.salBruto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
                     let outBaseCalculo = Number(this.baseCalculo).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
