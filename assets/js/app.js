@@ -192,7 +192,7 @@ class App {
 //método para o botão limpar
     Reset() {
         //Nome
-            let inNome = (document.querySelector("input[name='inNome']").value) = ''
+            let inNome = document.querySelector("input[name='inNome']").value = ''
             let inSalBruto = document.querySelector("input[name='inSalBruto']").value = ''
             let inDependenteQuantity = document.querySelector("input[name='inDependente']").value = ''
             let inPensaoQuantity = document.querySelector("input[name='inPensao']").value = ''
@@ -206,6 +206,35 @@ class App {
             displayPensao.classList.add("checkDisplayPensao")
             let displayDependente = document.querySelector("div[name='DependenteDisplay']")
             displayDependente.classList.add("checkDisplayDependente")
+
+            this.ValidacaoNomeReset()
+            this.ValidacaoSalBrutoReset()
+            this.DisplayOcultar()
+
         }
+
+
+    ValidacaoNomeReset() {
+        let borderNome = document.getElementById('inNome')
+            borderNome.style.border = 'none'
+            borderNome.style.border = '1.5px solid #dbdbdb'
+
+            let outValidacaoNomeHelp = document.querySelector("p[name='outValidacaoNomeHelp']") 
+            let outValidacaoNomeIcon = document.querySelector("span[name='outValidacaoNomeIcon']")
+            outValidacaoNomeHelp.textContent = ''
+            outValidacaoNomeIcon.classList.add("ValidacaoNomeIcon")
+    }
+
+    ValidacaoSalBrutoReset() {
+        let borderSalBruto = document.getElementById('inSalBruto')
+        borderSalBruto.style.border = 'none'
+        borderSalBruto.style.border = '1.5px solid #dbdbdb'
+
+        let outValidacaoSalBrutoHelp = document.querySelector("p[name='outValidacaoSalBrutoHelp']")
+            let outValidacaoSalBrutoIcon = document.querySelector("span[name='outValidacaoSalBrutoIcon']")
+            outValidacaoSalBrutoHelp.textContent = ''
+            outValidacaoSalBrutoIcon.classList.add("ValidacaoSalBrutoIcon")
+    }
+
 }
 
