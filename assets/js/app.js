@@ -211,6 +211,9 @@ class App {
             this.ValidacaoSalBrutoReset()
             this.DisplayOcultar()
 
+            let resposta = document.getElementById("outRespostaApp")
+            resposta.parentNode.removeChild(resposta)
+
         }
 
 
