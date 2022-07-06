@@ -14,6 +14,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="assets/css/style.css">
   </head>
 
   <body>
@@ -35,7 +36,7 @@
           <div class="navbar-start">
             <a class="navbar-item" href="index.html"> Início </a>
 
-            <a class="navbar-item" href="referencias.html"> Cálculos </a>
+            <a class="navbar-item" href="calculos.html"> <abbr title="Em andamento" style="text-decoration:none"><s>Cálculos</s></abbr> </a>
           </div>
         </div>
       </nav>
@@ -46,34 +47,34 @@
         <div class="columns">
           <div class="column is-12">
             
-            <div class="field" id="nome">
+            <div class="field" id="nomeField">
               <label class="label">Nome</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input ValidacaoNome outValidacaoBordaNome" type="text" placeholder="Text input" value="" id="inNome" name="ValidacaoFormNome">
+                <input class="input" type="text" placeholder="Text input" value="" name="inNome" id="inNome" onclick="app.ValidacaoNomeReset()">
                 <span class="icon is-small is-left">
                   <i class="fas fa-user"></i>
                 </span>
-                <span class="icon is-small is-right ValidacaoNomeIcon" id="outValidacaoNomeIcon">
+                <span class="icon is-small is-right ValidacaoNomeIcon" name="outValidacaoNomeIcon">
                   <i class="fas fa-exclamation-triangle"></i>
                 </span>
               </div>
-              <p class="help is-danger ValidacaoNomeHelp" id="outValidacaoNomeHelp"></p>
+              <p class="help is-danger ValidacaoNomeHelp" name="outValidacaoNomeHelp"></p>
             </div>
             
 
             
-            <div class="field" id="SalBruto">
+            <div class="field" id="SalBrutoField">
               <label class="label">Salário Bruto</label>
               <div class="control has-icons-left has-icons-right">
-                <input class="input ValidacaoSalBruto outValidacaoBordaSalBruto" type="text" placeholder="Text input" value="" id="inSalBruto" name="ValidacaoFormSalBruto">
+                <input class="input" type="text" placeholder="Text input" value="" name="inSalBruto" id="inSalBruto" onclick="app.ValidacaoSalBrutoReset()">
                 <span class="icon is-small is-left">
                   <i class="fas fa-city"></i>
                 </span>
-                <span class="icon is-small is-right ValidacaoSalBrutoIcon" id="outValidacaoSalBrutoIcon">
+                <span class="icon is-small is-right ValidacaoSalBrutoIcon" name="outValidacaoSalBrutoIcon">
                   <i class="fas fa-exclamation-triangle"></i>
                 </span>
               </div>
-              <p class="help is-danger ValidacaoSalBrutoHelp" id="outValidacaoSalBrutoHelp"></p>
+              <p class="help is-danger ValidacaoSalBrutoHelp" name="outValidacaoSalBrutoHelp"></p>
             </div>
 
             <!-- Mesma div os dois checkbox -->
@@ -86,8 +87,8 @@
                      <!--  SIM -->
                       <input
                         type="checkbox"
-                        id="checkDependenteSim"
-                        onclick=""/>
+                        name="checkDependente"
+                        onclick="app.DisplayExibir()"/>
                       <span class="checkmark"></span>
                       Sim
                     </label>
@@ -98,15 +99,15 @@
                       <input
                         type="checkbox"
                         checked="checked"
-                        id="checkDependenteNao"
-                        onclick=""
+                        name="checkNotDependente"
+                        onclick="app.DisplayOcultar()"
                       />
                       <span class="checkmark"></span>
                       Não
                     </label>
                   </div>
                   <!-- INPUT DE RESPOSTA -->
-                  <div class="field checkDisplayDependente" id="DependenteDisplay">
+                  <div class="field checkDisplayDependente" id="DependenteDisplay" name="DependenteDisplay">
                     <div class="control has-icons-left">
                       <input
                         class="input"
@@ -114,6 +115,7 @@
                         placeholder="Dependent input"
                         value=""
                         id="inDependente"
+                        name="inDependente"
                       />
                       <span class="icon is-small is-left">
                         <i class="fas fa-home"></i>
@@ -130,9 +132,8 @@
                     <label class="radio check">
                       <input
                         type="checkbox"
-                       
-                        id="checkPensaoSim"
-                        onclick=""
+                        onclick="app.DisplayExibir()"
+                        name="checkPensao"
                       />
                       <span class="checkmark"></span>
                       Sim
@@ -144,15 +145,15 @@
                       <input
                         type="checkbox"
                         checked="checked"
-                        id="checkPensaoNao"
-                        onclick=""
+                        onclick="app.DisplayOcultar()"
+                        name="checkNotPensao"
                       />
                       <span class="checkmark"></span>
                       Não
                     </label>
                   </div>
                    <!-- INPUT DE RESPOSTA -->
-                  <div class="field checkDisplayPensao" id="PensaoDisplay">
+                  <div class="field checkDisplayPensao" id="PensaoDisplay" name="PensaoDisplay">
                     <div class="control has-icons-left">
                       <input
                         class="input"
@@ -160,6 +161,7 @@
                         placeholder="Pension input"
                         value=""
                         id="inPensao"
+                        name="inPensao"
                       />
                       <span class="icon is-small is-left">
                         <i class="fas fa-home"></i>
@@ -171,32 +173,18 @@
 
             <div class="field is-grouped botoes">
               <div class="control">
-                <button class="button is-primary" id="btCalcular">
+                <button type="button" class="button is-primary" onclick="app.Validar()">
                   Calcular
                 </button>
               </div>
               <div class="control">
-                <button class="button is-danger is-light" id="btLimpar">
+                <button class="button is-danger is-light" onclick="app.Reset()">
                   Limpar
                 </button>
               </div>
             </div>
 
-            <div class="RespostasApp" id="">
-              <div class="FuncionarioBotao" id="">
-                <div class="control controlDisplay" id="outDisplayControlFolha">
-                  <button class="button is-primary" id="btListar">
-                    Listar
-                  </button>
-                </div>
-
-                <pre class="displayVetorFuncionario formatacaoText" id="outFuncionario">
-                
-                </pre>
-              </div>
-              
-              <pre class="displayDescontosIndividuais formatacaoText" id="outDescontosIndividual"></pre>
-              <pre class="displayVetorFuncionarios" id="outFuncionarios"></pre>
+            <div class="RespostasApp" name="outRespostaApp" id="outRespostaApp">
             </div>
           </div>
         </div>
@@ -204,5 +192,7 @@
     </section>
 
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/funcionario.js"></script>
+    <script src="assets/js/index.js"></script>
   </body>
 </html>

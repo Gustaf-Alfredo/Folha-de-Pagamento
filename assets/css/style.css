@@ -43,7 +43,7 @@ section .container .title.is-4 {
 
     /*para conseguir por o label*/
     .check {
-        display: block;
+        display: inline-block;
         position: relative;
         padding-left: 35px;
         margin-bottom: 12px;
@@ -102,89 +102,21 @@ section .container .title.is-4 {
         display: block;
     }
 
-/*----------------------------------------------------------------------------------------*/
-
-
-/* para validações do Javascript  */
-.column.is-12 .field#nome {
-    
-}
-
-.column.is-12 .field#nome .ValidacaoNome {
-    /* border-color: #E0E0E0; */
-}
-
-.column.is-12 .field#nome .ValidacaoHelp {
-    /* display: none; */
-}
-
-.column.is-12 .field#nome .ValidacaoNomeIcon {
-    display: none; 
-}
-
-.column.is-12 .field#SalBruto .ValidacaoSalBrutoIcon {
-    display: none; 
-}
-
-.column.is-12 .displayVetorFuncionarios {
-     display: none; 
-}
-
-.column.is-12 .displayVetorFuncionario {
-      display: none;  
-}
-
-
-/* .column.is-9 .RespostasApp .control {
-   
-} */
-
-.column.is-12 .RespostasApp .controlDisplay {
-    display: none;
-    position: relative;
-    top: 35px;  
-    align-items: center;
-    justify-content: end;
-}
-
-.column.is-12 .RespostasApp .formatacaoBotao {
-    display: flex;
-}
-
-.column.is-12 .RespostasApp .FuncionarioBotao {
-    margin-bottom: 20px;
-}
-
-
-/* .column.is-9 .displayDescontosIndividuais {
-    display: none;
-} */
-
-.column.is-12 .formatacaoText {
-    display: none;
-}
-
-
-
-
-
-
-/* resete css para input */
-textarea:focus, input:focus, select:focus {
+    /* resete css para input */
+    textarea:focus, input:focus, select:focus {
     box-shadow: 0 0 0 0;
     border: 0 none;
     outline: 0;
 } 
+/*----------------------------------------------------------------------------------------*/
 
-/* .column.is-9 .field#nome .ValidacaoBorda {
-    background-color: #fff;
-    border-color: #dbdbdb;
-    border-radius: 4px;
-    color: #363636;
-} */
+.column.is-12 .field#nomeField .ValidacaoNomeIcon {
+    display: none;
+}
+.column.is-12 .field#SalBrutoField .ValidacaoSalBrutoIcon {
+    display: none; 
 
-
-
+}
 
 /* RESPONSIVO -------------------*/
 
@@ -204,6 +136,8 @@ textarea:focus, input:focus, select:focus {
         margin-right: 0;
     }
 
-   
-
 }
+
+
+
+

@@ -1,267 +1,243 @@
-//referências
-
-    //entrada de informações - in
-    const inNome = document.getElementById('inNome');
-    const inSalBruto = document.getElementById('inSalBruto');
-    const inDependente = document.getElementById('inDependente');
-    const inPensao = document.getElementById('inPensao');
-    
-    //checkmark - check
-    const checkDependenteSim = document.getElementById('checkDependenteSim');
-    const checkDependenteNao = document.getElementById('checkDependenteNao');
-    const checkPensaoSim = document.getElementById('checkPensaoSim');
-    const checkPensaoNao = document.getElementById('checkPensaoNao')
-
-    //botões - bt
-    const btCalcular = document.getElementById('btCalcular');
-    const btLimpar = document.getElementById('btLimpar');
-    const btListar = document.getElementById('btListar');
-
-    //resposta de validação - outValidacao
+class App {
+//método para registrar funcionário
+    Validar() {
+    //referencias - Nome/SalBruto
+        
         //Nome
-            const outValidacaoNomeHelp = document.getElementById('outValidacaoNomeHelp');
-            const outValidacaoNomeIcon = document.getElementById('outValidacaoNomeIcon');
-            const outValidacaoBordaNome = document.querySelector(".outValidacaoBordaNome")
+            let inNome = (document.querySelector("input[name='inNome']").value)
+            let outValidacaoNomeIcon = document.querySelector("span[name='outValidacaoNomeIcon']")
+            let outValidacaoNomeHelp = document.querySelector("p[name='outValidacaoNomeHelp']")
         //SalBruto
-            const outValidacaoSalBrutoHelp = document.getElementById('outValidacaoSalBrutoHelp');
-            const outValidacaoSalBrutoIcon = document.getElementById('outValidacaoSalBrutoIcon');
-            const outValidacaoBordaSalBruto = document.querySelector(".outValidacaoBordaSalBruto");
-        //display - Dependente 
-            const DependenteDisplay = document.getElementById('DependenteDisplay');
-            const PensaoDisplay = document.getElementById('PensaoDisplay');
-
-    //resposta do programa - out
-    const outFuncionario = document.getElementById('outFuncionario');
-    const outFuncionarios = document.getElementById('outFuncionarios');
-    const outDescontosIndividual = document.getElementById('outDescontosIndividual');
-    const outDisplayControlFolha = document.getElementById('outDisplayControlFolha');
-
-    //criação de vetor global
-    let Funcionarios = []
-
-//iniciando programa
-
- function calcular () {
-    //valores de escopo maior
-    let nome = inNome.value;
-    let salBruto = Number(inSalBruto.value);
-    let dependente = Number(inDependente.value);
-    let pensao = Number(inPensao.value);
-    let descontoINSS = Number();
-    let descontoIRPF = Number();
-    let SalBrutoGlobalDescINSS = Number()
-     //funções de cálculos
-            //Cálculo INSS
-            function INSSdesconto (tetoINSS1, tetoINSS2, tetoINSS3, tetoINSS4,/* */taxaINSS1,taxaINSS2,taxaINSS3,taxaINSS4) {
-                //validação
-                    if (salBruto < tetoINSS1) {
-                        descontoINSS = salBruto * taxaINSS1
-                    } else 
-                    if (salBruto >= tetoINSS1 && salBruto < tetoINSS2) {
-                        descontoINSS = salBruto * taxaINSS2
-                    } else
-                    if (salBruto >= tetoINSS2 && salBruto < tetoINSS3) {
-                        descontoINSS = salBruto * taxaINSS3
-                    } else
-                    if (salBruto >= tetoINSS3 && salBruto < tetoINSS4) {
-                        descontoINSS = salBruto * taxaINSS4               
-                    } else
-                    if (salBruto >= tetoINSS4) {
-                        descontoINSS = tetoINSS4 * taxaINSS4              
-                    } return descontoINSS
-                    //INSSdesconto - função
-                    //descontoINSS - variável
-            }
-
-            //Cálculo IRPF
-            function IRPFdesconto(tetoIRPF1, tetoIRPF2, tetoIRPF3, tetoIRPF4,/* */ taxaIRPF1, taxaIRPF2, taxaIRPF3, taxaIRPF4,/* */deducoesIRPF1,deducoesIRPF2,deducoesIRPF3,deducoesIRPF4,/* */descUnitarioDependente) { 
-                //validação
-                SalBrutoGlobalDescINSS = (salBruto - descontoINSS) - (descUnitarioDependente * dependente) - pensao;
-                console.log(SalBrutoGlobalDescINSS)
-                    if( SalBrutoGlobalDescINSS < tetoIRPF1) {
-                        descontoIRPF = 0
-                    } else 
-                    if ( SalBrutoGlobalDescINSS >= tetoIRPF1 &&  SalBrutoGlobalDescINSS < tetoIRPF2) {    
-                        descontoIRPF = (SalBrutoGlobalDescINSS * taxaIRPF1) - deducoesIRPF1
-                    } else
-                    if (SalBrutoGlobalDescINSS >= tetoIRPF2 && SalBrutoGlobalDescINSS < tetoIRPF3) {                      
-                        descontoIRPF = (SalBrutoGlobalDescINSS * taxaIRPF2) - deducoesIRPF2
-                    } else 
-                    if (SalBrutoGlobalDescINSS >= tetoIRPF3 && SalBrutoGlobalDescINSS < tetoIRPF4) {                      
-                        descontoIRPF = (SalBrutoGlobalDescINSS * taxaIRPF3) - deducoesIRPF3
-                    } else
-                    if (SalBrutoGlobalDescINSS >= tetoIRPF4) {                 
-                        descontoIRPF = (SalBrutoGlobalDescINSS * taxaIRPF4) - deducoesIRPF4                       
-                    } 
-                    return descontoIRPF
-                    //IRPFdesconto - função
-                    //descontoIRPF - variável
-            }
-    let INSSdescontoVariavel = INSSdesconto(1212.01, 2427.35, 3641.03, 7087.22,/**/0.075,0.09,0.12,0.14);
-    //tetoINSS1 à tetoINSS4 //taxaINSS1 à taxaINSS4 //
-    let IRPFdescontoVariavel = IRPFdesconto(1903.98, 2826.66,3751.06,4664.68,/**/0.075,0.15,0.225,0.275,/**/142.8,354.8,636.13,869.36,/* */189.59);
-    //tetoIRPF1 à tetoIRPF4 // taxaIRPF1 à taxaIRPF4 // deducoesIRPF1 à deducoesIRPF4 // desconto unitário de dependente
-
-
-    //validação para nome
-    if(nome == "") {
-        inNome.style.border = '2px solid #FF2B56';
-        outValidacaoNomeHelp.textContent = 'Por favor, preencha corretamente o formulário...' ;           
-        outValidacaoNomeIcon.classList.remove("ValidacaoNomeIcon");
-    } 
-    //validação para salário bruto
-        if (salBruto <= 0  || salBruto == "" || isNaN(salBruto)) {
-        inSalBruto.style.border = '2px solid #FF2B56';
-        outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500.50';
-        outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
-        } else  {        
-            //recebendo informação de checkmark
-            let Dependentecheck = checkDependenteSim.checked;
-            let Pensaocheck = checkPensaoSim.checked;
-            //enviando dados para o vetor => nome e salBruto
-            Funcionarios.push({funcionario: nome, salario: salBruto, dependente: Dependentecheck, numeroDependente: dependente, pensao: Pensaocheck,valorPensao: pensao, descontoINSS: descontoINSS, descontoIRPF: descontoIRPF});  
-            console.log(Funcionarios)         
-            checkNaoDependente()
-            checkNaoPensao();          
-            folhaIndividual();
-            inNome.focus();   
-            ResetePreenchimento()  
-           
-            
-    }
-        function folhaIndividual() {
-            outFuncionario.classList.remove('displayVetorFuncionario');
-            outFuncionario.classList.remove('formatacaoText')
-            outDisplayControlFolha.classList.add('formatacaoBotao');
-            let FichaIndividual = '';
-            for(let i = 0; i < Funcionarios.length; i++) {
-                FichaIndividual = `Ficha individual atual\n
-                Nome: ${Funcionarios[i].funcionario}\n
-                Salário: ${(Funcionarios[i].salario).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
-                Possui dependentes: ${Funcionarios[i].dependente}\n
-                Paga pensão: ${(Funcionarios[i].valorPensao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
-                Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
-                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n`;
-                
-            }
-            outFuncionario.innerText = FichaIndividual;
-                                       
+            let inSalBruto = document.querySelector("input[name='inSalBruto']").value
+            let outValidacaoSalBrutoHelp = document.querySelector("p[name='outValidacaoSalBrutoHelp']")
+            let outValidacaoSalBrutoIcon = document.querySelector("span[name='outValidacaoSalBrutoIcon']")
+    //validações
+        if(inNome == '') {
+            let inNome = document.querySelector("input[name='inNome']")
+            inNome.style.border = '2px solid #FF2B56'
+            outValidacaoNomeHelp.textContent = 'Por favor, preencha corretamente o formulário...'            
+            outValidacaoNomeIcon.classList.remove("ValidacaoNomeIcon")
         } 
+        if(inSalBruto == '' || isNaN(inSalBruto) || inSalBruto <= 0) {
+            let inSalBruto = document.querySelector("input[name='inSalBruto']")
+            inSalBruto.style.border = '2px solid #FF2B56'
+            outValidacaoSalBrutoHelp.innerText = 'Por favor, preencha corretamente o salário bruto...\nExemplo: 1500.50'
+            outValidacaoSalBrutoIcon.classList.remove("ValidacaoSalBrutoIcon")
+        } else {
+            this.Imprimir()
+        }
+}
 
-        function folhaCompleta() {
-            outFuncionarios.classList.remove('displayVetorFuncionarios');
-            let ListaFuncionarios = '';
-            for (let i = 0; i < Funcionarios.length; i++) {
-                ListaFuncionarios += `Ficha individual\n
-                Nome: ${Funcionarios[i].funcionario}\n
-                Salário: ${(Funcionarios[i].salario).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
-                Possui dependentes: ${Funcionarios[i].dependente}\n
-                Paga pensão: ${(Funcionarios[i].valorPensao).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
-                Desconto do INSS(R$): ${(Funcionarios[i].descontoINSS).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n
-                Desconto IRPF(R$): ${(Funcionarios[i].descontoIRPF).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}\n\n`;
-            }
+//   -------------------------------------------CALCULOS--------------------------------------//
 
-            //validação para o vetor
-            if(Funcionarios.length == 1) {
-                window.alert('Registre mais fichas para poder listar...')
+    //método responsável pelo cálculo INSS
+    INSSdesconto(descontoINSS,/**/tetoINSS1,tetoINSS2,tetoINSS3,tetoINSS4,/**/taxaINSS1,taxaINSS2,taxaINSS3,taxaINSS4) {
+        
+        this.descontoINSS = descontoINSS
+
+        if(this.salBruto <= tetoINSS1) {
+            descontoINSS = this.salBruto * taxaINSS1
+        } else 
+        if (this.salBruto > tetoINSS1 && this.salBruto <= tetoINSS2) {
+            descontoINSS = this.salBruto * taxaINSS2
+        } else
+        if(this.salBruto > tetoINSS2 && this.salBruto <= tetoINSS3) {
+            descontoINSS = this.salBruto * taxaINSS3
+        } else 
+        if(this.salBruto > tetoINSS3 && this.salBruto <= tetoINSS4) {
+            descontoINSS = this.salBruto * taxaINSS4
+        } else
+        if(this.salBruto > tetoINSS4) {
+            descontoINSS = tetoINSS4 * taxaINSS4
+        }
+        return descontoINSS
+    }
+
+    //método responsável pelo cálculo IRPF
+    IRPFdesconto(descontoIRPF,/**/tetoIRPF1,tetoIRPF2,tetoIRPF3,tetoIRPF4,/**/taxaIRPF1,taxaIRPF2,taxaIRPF3,taxaIRPF4,/**/deducoesIRPF1,deducoesIRPF2,deducoesIRPF3,deducoesIRPF4) {
+
+        this.baseCalculo = (this.salBruto - this.INSSdescontoVariavel) - this.inPensaoQuantity - (this.inDependenteQuantity * 189.59)
+        this.descontoIRPF = descontoIRPF
+
+        if(this.baseCalculo <= tetoIRPF1) {
+            descontoIRPF = 0
+        } else 
+        if(this.baseCalculo > tetoIRPF1 && this.baseCalculo <= tetoIRPF2) {
+            descontoIRPF = (this.baseCalculo * taxaIRPF1) - deducoesIRPF1
+        } else
+        if(this.baseCalculo > tetoIRPF2 && this.baseCalculo <= tetoIRPF3) {
+            descontoIRPF = (this.baseCalculo * taxaIRPF2) - deducoesIRPF2
+        } else
+        if(this.baseCalculo > tetoIRPF3 && this.baseCalculo <= tetoIRPF4) {
+            descontoIRPF = (this.baseCalculo * taxaIRPF3) - deducoesIRPF3
+        } else
+        if(this.baseCalculo > tetoIRPF4) {
+            descontoIRPF = (this.baseCalculo * taxaIRPF4) - deducoesIRPF4
+        }
+        return descontoIRPF
+        
+    }
+// -----------------------------------------------------------------------------------------------------------//
+
+
+//métodos para uso do checkbox - DisplayExibir/DisplayOcultar
+
+    DisplayExibir() {
+        this.dependente = document.querySelector("input[name='checkDependente']").checked
+        this.pensao = document.querySelector("input[name='checkPensao']").checked
+        if(this.dependente) {
+            document.querySelector("input[name='checkNotDependente']").checked = false
+            let displayDependente = document.querySelector("div[name='DependenteDisplay']")
+            displayDependente.classList.remove("checkDisplayDependente")           
+        }
+        if(this.pensao) {
+            document.querySelector("input[name='checkNotPensao']").checked = false
+            let displayPensao = document.querySelector("div[name='PensaoDisplay']")
+            displayPensao.classList.remove("checkDisplayPensao")
+        }  
+    }
+
+    DisplayOcultar() {
+        this.dependenteNot= document.querySelector("input[name='checkNotDependente']").checked
+        this.pensaoNot = document.querySelector("input[name='checkNotPensao']").checked
+        if(this.dependenteNot) {
+            document.querySelector("input[name='checkDependente']").checked = false
+            let displayDependente = document.querySelector("div[name='DependenteDisplay']")
+            displayDependente.classList.add("checkDisplayDependente")
+        }
+        if(this.pensaoNot) {
+            document.querySelector("input[name='checkPensao']").checked = false
+            let displayPensao = document.querySelector("div[name='PensaoDisplay']")
+            displayPensao.classList.add("checkDisplayPensao")
+        }
+    }
+//Método para imprimir o resultado
+    Imprimir() {
+            //referências
+                let nome = document.querySelector("input[name='inNome']").value
+                this.nome = nome
+                let inSalBruto = document.querySelector("input[name='inSalBruto']").value
+                this.salBruto = inSalBruto
+                this.dependente = document.querySelector("input[name='checkDependente']").checked
+                this.pensao = document.querySelector("input[name='checkPensao']").checked
+        
+            //check
+            if(this.dependente) {
+                this.inDependenteQuantity = document.querySelector("input[name='inDependente']").value 
+                this.outDependente = this.inDependenteQuantity
             } else {
-                outFuncionarios.innerText = ListaFuncionarios;
+                this.outDependente = 'Não possui dependentes'
+                this.inDependenteQuantity = 0
+            }
+            if(this.pensao) {
+                this.inPensaoQuantity = document.querySelector("input[name='inPensao']").value
+                this.outPensao = Number(this.inPensaoQuantity).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+            }  else {
+                this.outPensao = 'Não paga pensão alimentícia'
+                this.inPensaoQuantity = 0
             }
             
-        }
+            //argumentos - INSSdesconto/IRPFdesconto
+                this.INSSdescontoVariavel = this.INSSdesconto(this.descontoINSS,1212.01,2427.35,3641.03,7087.22,/**/0.075,0.09,0.12,0.14)
+                this.IRPFdescontoVariavel = this.IRPFdesconto(this.descontoIRPF,1903.98,2826.66,3751.06,4664.68/**/,0.075,0.15,0.225,0.275,/**/142.8,354.8,636.13,869.36)
+        
+            //cálculo para ter sálario líquido
+                this.salLiquido = inSalBruto - this.INSSdescontoVariavel - this.IRPFdescontoVariavel
+        
+            //instanciando a classe Funcionario
+                let funcionario = new Funcionario(nome,inSalBruto,this.dependente,this.inDependenteQuantity,this.pensao,this.inPensaoQuantity,this.salLiquido)
+        
+            //Resposta do programa
 
 
-        //acionamento da folhaCompleta() que está dentro da resposta do calcular()
-        btListar.addEventListener("click", folhaCompleta);
+                //para adptar o valor ao modelo: R$ 0,00
+                    let outSalBruto = Number(this.salBruto).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                    let outBaseCalculo = Number(this.baseCalculo).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+                    let outPensao = Number(this.inPensaoQuantity).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+                    let outINSSdescontoVariavel = Number(this.INSSdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+                    let outIRPFdescontoVariavel = Number(this.IRPFdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+                    let outSalarioLiquido = Number(this.salBruto - this.INSSdescontoVariavel - this.IRPFdescontoVariavel).toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+                //Resposta do programa
 
+                let outRespostaApp = 'Nome: ' + nome + '\n'+
+                                            'Salário Bruto: ' + outSalBruto + '\n' +
+                                            'Dependentes: ' + this.outDependente + '\n' +
+                                            'Pensão alimentícia: ' + this.outPensao + '\n' +
+                                            'Base de cálculo: ' + outBaseCalculo + '\n' +
+                                            '\n' + 'Descontos: ' + '\n' +
+                                                    'INSS: ' + outINSSdescontoVariavel + '\n' +
+                                                    'IRPF: ' + outIRPFdescontoVariavel + '\n' +
+                                            'Salário Líquido: ' + outSalarioLiquido + '\n'
 
- } //FIM  DA FUNCAO CALCULAR
-
-
-
-
-  //funções de reset
-            //nome
-            function resetNome() {
-                inNome.style.border = 'none';
-                outValidacaoBordaNome.style.border = '0.1px solid #dbdbdb';
-                outValidacaoNomeHelp.textContent = '';
-                outValidacaoNomeIcon.classList.add('ValidacaoNomeIcon');
-            } 
-        //SalBruto
-            function resetSalBruto() {
-                inSalBruto.style.border = 'none';
-                outValidacaoBordaSalBruto.style.border = '0.1px solid #dbdbdb';
-                outValidacaoSalBrutoHelp.textContent = '';
-                outValidacaoSalBrutoIcon.classList.add('ValidacaoSalBrutoIcon');
-            }
-    //checkmark(função) - Dependetes e Pensao
-        function checkSimDependente() {
-            DependenteDisplay.classList.remove('checkDisplayDependente');
-            checkDependenteNao.checked = "";
-            inDependente.focus();
-        } 
-
-        function checkNaoDependente() {
-            DependenteDisplay.classList.add('checkDisplayDependente');
-            checkDependenteSim.checked = "";
-        }
-
-        function checkSimPensao() {
-            PensaoDisplay.classList.remove('checkDisplayPensao');
-            checkPensaoNao.checked = "";
-            inPensao.focus();
-        }
-
-        function checkNaoPensao() {
-            PensaoDisplay.classList.add('checkDisplayPensao');
-            checkPensaoSim.checked = "";
-        }
-
-    //função de limpar o formulário
-
+                let listElement = document.createElement("pre")
+                listElement.style.margin = '0px 0px 30px 0px'
+                listElement.innerHTML += outRespostaApp
+                let buttonToRemove = this.createRemoveButton()
+                listElement.appendChild(buttonToRemove)
+                document.getElementById("outRespostaApp").appendChild(listElement)
+    }
+//criar botao para remover a resposta de um elemento do programa
+    createRemoveButton() {
+        let buttonToRemove = document.createElement("button")
+        buttonToRemove.style.margin = '30px 0px 0px 0px'
+        buttonToRemove.setAttribute("onclick", "app.remove()")
+        buttonToRemove.innerText = "Remover"
+        return buttonToRemove
+    }
+//método para o botao de remover
+    remove() {
+        let liToRemove = event.target.parentNode
+        document.getElementById("outRespostaApp").removeChild(liToRemove)
+    }
+//método para o botão limpar
+    Reset() {
+        //Nome
+            let inNome = document.querySelector("input[name='inNome']").value = ''
+            let inSalBruto = document.querySelector("input[name='inSalBruto']").value = ''
+            let inDependenteQuantity = document.querySelector("input[name='inDependente']").value = ''
+            let inPensaoQuantity = document.querySelector("input[name='inPensao']").value = ''
     
-    function Limpar() {
-        //limpando input
-            inNome.value = '';
-            inSalBruto.value = '';
-            inDependente.value = '';
-            inPensao.value = ''; 
-        //resetando check
-            checkPensaoNao.checked = true;
-            checkDependenteNao.checked = true;
-        //para => display: none
-            outFuncionario.classList.add('displayVetorFuncionario');
-            outFuncionarios.classList.add('displayVetorFuncionarios');
-            outDisplayControlFolha.classList.remove('formatacaoBotao');
+            this.dependente = document.querySelector("input[name='checkDependente']").checked = false
+            this.pensao = document.querySelector("input[name='checkPensao']").checked = false
+            this.dependente = document.querySelector("input[name='checkNotDependente']").checked = true
+            this.pensao = document.querySelector("input[name='checkNotPensao']").checked = true
+    
+            let displayPensao = document.querySelector("div[name='PensaoDisplay']")
+            displayPensao.classList.add("checkDisplayPensao")
+            let displayDependente = document.querySelector("div[name='DependenteDisplay']")
+            displayDependente.classList.add("checkDisplayDependente")
+
+            this.ValidacaoNomeReset()
+            this.ValidacaoSalBrutoReset()
+            this.DisplayOcultar()
+
+            let resposta = document.getElementById("outRespostaApp")
+            resposta.parentNode.removeChild(resposta)
+
+        }
+
+
+    ValidacaoNomeReset() {
+        let borderNome = document.getElementById('inNome')
+            borderNome.style.border = 'none'
+            borderNome.style.border = '1.5px solid #dbdbdb'
+
+            let outValidacaoNomeHelp = document.querySelector("p[name='outValidacaoNomeHelp']") 
+            let outValidacaoNomeIcon = document.querySelector("span[name='outValidacaoNomeIcon']")
+            outValidacaoNomeHelp.textContent = ''
+            outValidacaoNomeIcon.classList.add("ValidacaoNomeIcon")
     }
 
-    function ResetePreenchimento() {
-        inNome.value = '';
-        inSalBruto.value = '';
-        inDependente.value = '';
-        inPensao.value = ''; 
-        checkPensaoNao.checked = true;
-        checkDependenteNao.checked = true;
+    ValidacaoSalBrutoReset() {
+        let borderSalBruto = document.getElementById('inSalBruto')
+        borderSalBruto.style.border = 'none'
+        borderSalBruto.style.border = '1.5px solid #dbdbdb'
+
+        let outValidacaoSalBrutoHelp = document.querySelector("p[name='outValidacaoSalBrutoHelp']")
+            let outValidacaoSalBrutoIcon = document.querySelector("span[name='outValidacaoSalBrutoIcon']")
+            outValidacaoSalBrutoHelp.textContent = ''
+            outValidacaoSalBrutoIcon.classList.add("ValidacaoSalBrutoIcon")
     }
-    
-    //acionamento de eventos
-        //botões
-            btCalcular.addEventListener("click", calcular);
-            btLimpar.addEventListener("click", Limpar);
-        //input
-            inNome.addEventListener("click", resetNome);
-            inSalBruto.addEventListener("click", resetSalBruto);
-        //check
-             checkDependenteSim.addEventListener("click", checkSimDependente)
-             checkDependenteNao.addEventListener("click", checkNaoDependente)
-             checkPensaoSim.addEventListener("click", checkSimPensao)
-             checkPensaoNao.addEventListener("click", checkNaoPensao)
-            /* 
-            obs:    checkDependenteSim - variável referenciada
-                    checkSimDependente - função 
-            */
 
-
-
+}
 
